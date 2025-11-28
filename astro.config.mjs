@@ -10,8 +10,8 @@ import { defineConfig } from 'astro/config';
 // - GITHUB_REPO: your repository name
 // For local dev, set base to '/' via ASTRO_BASE env variable
 const isDev = process.env.NODE_ENV === 'development';
-const GITHUB_USERNAME = process.env.GITHUB_USERNAME || 'yourusername';
-const GITHUB_REPO = process.env.GITHUB_REPO || 'astro';
+const GITHUB_USERNAME = process.env.GITHUB_USERNAME || 'vibery-studio';
+const GITHUB_REPO = process.env.GITHUB_REPO || 'astro-starter';
 
 // https://astro.build/config
 export default defineConfig({
