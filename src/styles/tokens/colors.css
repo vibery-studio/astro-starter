@@ -1,0 +1,65 @@
+/* Design tokens: Color palette for Vibe Coding Product Studio */
+:root {
+	/* Primary palette */
+	--color-primary: #0066FF;
+	--color-primary-light: #3385FF;
+	--color-primary-dark: #0052CC;
+
+	/* Accent */
+	--color-accent: #FF6B6B;
+	--color-accent-light: #FF8A8A;
+	--color-accent-dark: #E55555;
+
+	/* Metallics */
+	--color-metallic: #B8C4CE;
+	--color-metallic-light: #D4DDE5;
+	--color-metallic-dark: #8A9BAA;
+
+	/* Ethereal blues */
+	--color-ethereal: #A7C7E7;
+	--color-ethereal-light: #C5DCF2;
+	--color-ethereal-dark: #7BA8D4;
+
+	/* Neutrals */
+	--color-neutral-900: #1A1A2E;
+	--color-neutral-800: #2D2D44;
+	--color-neutral-700: #404060;
+	--color-neutral-600: #5C5C7A;
+	--color-neutral-500: #7A7A94;
+	--color-neutral-400: #9999AD;
+	--color-neutral-300: #B8B8C7;
+	--color-neutral-200: #D6D6E0;
+	--color-neutral-100: #EBEBF0;
+	--color-neutral-50: #F5F5F8;
+	--color-white: #FFFFFF;
+
+	/* Semantic colors */
+	--color-text: var(--color-neutral-900);
+	--color-text-secondary: var(--color-neutral-600);
+	--color-text-muted: var(--color-neutral-500);
+	--color-surface: var(--color-white);
+	--color-surface-elevated: var(--color-neutral-50);
+	--color-border: var(--color-neutral-200);
+	--color-border-light: var(--color-neutral-100);
+
+	/* Status colors */
+	--color-success: #10B981;
+	--color-warning: #F59E0B;
+	--color-error: #EF4444;
+	--color-info: var(--color-primary);
+
+	/* Glass effect colors */
+	--glass-bg: rgba(255, 255, 255, 0.1);
+	--glass-border: rgba(255, 255, 255, 0.2);
+	--glass-shadow: rgba(0, 0, 0, 0.1);
+
+	/* Legacy compatibility (for existing components) */
+	--accent: var(--color-primary);
+	--accent-dark: var(--color-primary-dark);
+	--black: 26, 26, 46;
+	--gray: 122, 122, 148;
+	--gray-light: 214, 214, 224;
+	--gray-dark: 64, 64, 96;
+	--gray-gradient: rgba(var(--gray-light), 50%), var(--color-white);
+	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%);
+}

@@ -1,0 +1,100 @@
+/* Design tokens: Visual effects (glassmorphism, neumorphism, shadows) */
+:root {
+	/* Shadows */
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	--shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	--shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+	/* Glass shadow */
+	--shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+	/* Neumorphism shadows */
+	--shadow-neuro-light: -5px -5px 10px rgba(255, 255, 255, 0.8);
+	--shadow-neuro-dark: 5px 5px 10px rgba(0, 0, 0, 0.15);
+	--shadow-neuro-inset-light: inset -3px -3px 7px rgba(255, 255, 255, 0.8);
+	--shadow-neuro-inset-dark: inset 3px 3px 7px rgba(0, 0, 0, 0.1);
+
+	/* Transitions */
+	--transition-fast: 150ms ease;
+	--transition-base: 250ms ease;
+	--transition-slow: 350ms ease;
+	--transition-slower: 500ms ease;
+
+	/* Blur values */
+	--blur-sm: 4px;
+	--blur-md: 8px;
+	--blur-lg: 16px;
+	--blur-xl: 24px;
+}
+
+/* Glassmorphism utility */
+.glass {
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(var(--blur-lg));
+	-webkit-backdrop-filter: blur(var(--blur-lg));
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: var(--shadow-glass);
+}
+
+/* Dark glass variant */
+.glass-dark {
+	background: rgba(26, 26, 46, 0.7);
+	backdrop-filter: blur(var(--blur-lg));
+	-webkit-backdrop-filter: blur(var(--blur-lg));
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	box-shadow: var(--shadow-glass);
+}
+
+/* Neumorphism button */
+.neuro {
+	background: var(--color-neutral-100);
+	box-shadow: var(--shadow-neuro-light), var(--shadow-neuro-dark);
+	border: none;
+	border-radius: var(--radius-lg);
+	transition: box-shadow var(--transition-base);
+}
+
+.neuro:hover {
+	box-shadow: var(--shadow-neuro-light), 8px 8px 16px rgba(0, 0, 0, 0.18);
+}
+
+.neuro:active,
+.neuro-pressed {
+	box-shadow: var(--shadow-neuro-inset-light), var(--shadow-neuro-inset-dark);
+}
+
+/* Gradient backgrounds */
+.gradient-primary {
+	background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+.gradient-accent {
+	background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+}
+
+.gradient-ethereal {
+	background: linear-gradient(135deg, var(--color-ethereal-light) 0%, var(--color-primary-light) 100%);
+}
+
+/* Hover transitions */
+.hover-lift {
+	transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--shadow-lg);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
