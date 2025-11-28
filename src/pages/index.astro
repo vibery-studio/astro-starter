@@ -334,7 +334,10 @@ const locations = [
 		position: relative;
 		z-index: 10;
 		text-align: center;
-		padding: 2rem;
+		padding: 0 clamp(1.5rem, 5vw, 3rem);
+		max-width: 1200px;
+		margin: 0 auto;
+		width: 100%;
 	}
 
 	.hero-title {
@@ -387,8 +390,27 @@ const locations = [
 	   MENU SECTION - Asymmetric masonry
 	   ======================================== */
 	.menu-section {
-		padding: clamp(4rem, 10vw, 8rem) 0;
-		background: var(--color-bg);
+		padding: clamp(6rem, 12vw, 10rem) 0;
+		background: linear-gradient(
+			180deg,
+			var(--color-bg) 0%,
+			var(--color-bg-subtle) 50%,
+			var(--color-bg) 100%
+		);
+		position: relative;
+		overflow: hidden;
+
+		/* Organic curved transition from hero */
+		&::before {
+			content: '';
+			position: absolute;
+			top: -50px;
+			left: 0;
+			right: 0;
+			height: 100px;
+			background: var(--color-bg);
+			border-radius: 0 0 50% 50% / 0 0 100% 100%;
+		}
 	}
 
 	.section-header-offset {
@@ -480,8 +502,29 @@ const locations = [
 	   STORY SECTION - Side by side
 	   ======================================== */
 	.story-section {
-		padding: clamp(4rem, 10vw, 8rem) 0;
+		padding: clamp(6rem, 12vw, 10rem) 0;
 		background: var(--color-bg-elevated);
+		position: relative;
+
+		/* Smooth wave transition */
+		&::before {
+			content: '';
+			position: absolute;
+			top: -1px;
+			left: 0;
+			right: 0;
+			height: 80px;
+			background: var(--color-bg-subtle);
+			clip-path: polygon(
+				0 0,
+				100% 0,
+				100% 50%,
+				75% 70%,
+				50% 60%,
+				25% 70%,
+				0 50%
+			);
+		}
 	}
 
 	.story-grid {
@@ -557,8 +600,25 @@ const locations = [
 	   LOCATIONS SECTION - Pin layout
 	   ======================================== */
 	.locations-section {
-		padding: clamp(4rem, 10vw, 8rem) 0;
-		background: var(--color-bg);
+		padding: clamp(6rem, 12vw, 10rem) 0;
+		background: linear-gradient(
+			180deg,
+			var(--color-bg) 0%,
+			var(--color-bg-subtle) 100%
+		);
+		position: relative;
+
+		/* Organic curve from story */
+		&::before {
+			content: '';
+			position: absolute;
+			top: -50px;
+			left: 0;
+			right: 0;
+			height: 100px;
+			background: var(--color-bg-elevated);
+			border-radius: 0 0 50% 50% / 0 0 80% 80%;
+		}
 	}
 
 	.section-header-center {
@@ -643,8 +703,21 @@ const locations = [
 	   GALLERY SECTION - Photo grid
 	   ======================================== */
 	.gallery-section {
-		padding: clamp(4rem, 10vw, 8rem) 0;
+		padding: clamp(6rem, 12vw, 10rem) 0;
 		background: var(--color-bg-elevated);
+		position: relative;
+
+		/* Smooth transition */
+		&::before {
+			content: '';
+			position: absolute;
+			top: -1px;
+			left: 0;
+			right: 0;
+			height: 60px;
+			background: var(--color-bg-subtle);
+			clip-path: ellipse(100% 100% at 50% 0%);
+		}
 	}
 
 	.gallery-header {
@@ -710,9 +783,26 @@ const locations = [
 	   CTA SECTION - Warm invitation
 	   ======================================== */
 	.cta-section {
-		padding: clamp(5rem, 12vw, 10rem) 0;
-		background: var(--color-bg);
+		padding: clamp(6rem, 14vw, 12rem) 0;
+		background: linear-gradient(
+			180deg,
+			var(--color-bg) 0%,
+			var(--color-bg-subtle) 100%
+		);
 		text-align: center;
+		position: relative;
+
+		/* Final organic curve */
+		&::before {
+			content: '';
+			position: absolute;
+			top: -50px;
+			left: 0;
+			right: 0;
+			height: 100px;
+			background: var(--color-bg-elevated);
+			border-radius: 0 0 50% 50% / 0 0 100% 100%;
+		}
 	}
 
 	.cta-title {
