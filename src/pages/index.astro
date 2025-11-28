@@ -316,10 +316,13 @@ const locations = [
 		align-items: center;
 		justify-content: center;
 		overflow: hidden;
-		/* Break out of main container - full width edge-to-edge */
+		/* Full width edge-to-edge - simpler approach */
 		width: 100vw;
-		margin-left: calc(50% - 50vw);
-		margin-right: calc(50% - 50vw);
+		position: relative;
+		left: 50%;
+		right: 50%;
+		margin-left: -50vw;
+		margin-right: -50vw;
 	}
 
 	.hero-background {
