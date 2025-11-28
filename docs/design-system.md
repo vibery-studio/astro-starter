@@ -332,22 +332,196 @@ All animations/transitions disabled when user prefers reduced motion:
 }
 ```
 
-## Usage Examples
+## UI Components (Phase 2)
 
-### Button with Glassmorphism
+Location: `src/components/ui/`
+
+### Button (Button.astro)
+
+4 variants, 3 sizes, link/button support.
+
 ```astro
-<button class="glass hover-lift" style="padding: var(--space-4) var(--space-8); border-radius: var(--radius-lg);">
-  Click Me
-</button>
+import Button from '@/components/ui/Button.astro';
+
+<!-- Primary (default) -->
+<Button>Click Me</Button>
+<Button variant="primary" size="lg">Large Button</Button>
+
+<!-- Secondary (outline) -->
+<Button variant="secondary">Learn More</Button>
+
+<!-- Glass (frosted) -->
+<Button variant="glass">Glassmorphic</Button>
+
+<!-- Neuro (soft UI) -->
+<Button variant="neuro">Neumorphic</Button>
+
+<!-- As link -->
+<Button href="/about">Go to About</Button>
+
+<!-- Disabled -->
+<Button disabled>Disabled</Button>
+
+<!-- Sizes -->
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
 ```
 
-### Neumorphic Card
+**Variants:**
+- `primary`: Blue gradient, white text, hover lift + shadow
+- `secondary`: Transparent bg, blue border, fills on hover
+- `glass`: Frosted glass with backdrop-filter
+- `neuro`: Soft shadows (light+dark), inset on active
+
+**Props:**
+- `variant`: 'primary' | 'secondary' | 'glass' | 'neuro' (default: 'primary')
+- `size`: 'sm' | 'md' | 'lg' (default: 'md')
+- `href`: string (renders as `<a>`)
+- `type`: 'button' | 'submit' | 'reset' (default: 'button')
+- `disabled`: boolean
+- `class`: string
+
+### Card (Card.astro)
+
+Glassmorphic card with image support.
+
 ```astro
-<div class="neuro" style="padding: var(--space-6); max-width: var(--container-sm);">
-  <h3>Card Title</h3>
+import Card from '@/components/ui/Card.astro';
+import heroImg from '@/assets/hero.jpg';
+
+<!-- Basic card -->
+<Card>
   <p>Card content here</p>
-</div>
+</Card>
+
+<!-- With title + description -->
+<Card
+  title="Blog Post Title"
+  description="Short description of the post"
+/>
+
+<!-- With image -->
+<Card
+  title="Featured Post"
+  description="Post description"
+  image={heroImg}
+/>
+
+<!-- As link (hover effects) -->
+<Card
+  title="Click Me"
+  description="This card is clickable"
+  href="/blog/post"
+/>
 ```
+
+**Props:**
+- `title`: string
+- `description`: string
+- `image`: ImageMetadata (from Astro.assets)
+- `href`: string (enables hover effects)
+- `class`: string
+
+**Features:**
+- Glassmorphic bg: `rgba(255, 255, 255, 0.7)` + backdrop-filter
+- Image zoom on hover (scale 1.05)
+- Hover lift (-4px) + shadow-xl when `href` provided
+- Blue border tint on hover
+
+### Input (Input.astro)
+
+Neumorphic input with error state.
+
+```astro
+import Input from '@/components/ui/Input.astro';
+
+<!-- Basic input -->
+<Input name="email" />
+
+<!-- With label -->
+<Input
+  name="email"
+  label="Email Address"
+  type="email"
+/>
+
+<!-- Required field -->
+<Input
+  name="name"
+  label="Full Name"
+  required
+/>
+
+<!-- With placeholder -->
+<Input
+  name="phone"
+  label="Phone Number"
+  type="tel"
+  placeholder="+84 xxx xxx xxx"
+/>
+
+<!-- Error state -->
+<Input
+  name="email"
+  label="Email"
+  type="email"
+  error="Email is required"
+/>
+
+<!-- Disabled -->
+<Input
+  name="readonly"
+  label="Read Only"
+  value="Cannot edit"
+  disabled
+/>
+```
+
+**Props:**
+- `type`: 'text' | 'email' | 'password' | 'tel' | 'url' | 'number' (default: 'text')
+- `name`: string (required)
+- `label`: string
+- `placeholder`: string
+- `required`: boolean
+- `disabled`: boolean
+- `value`: string
+- `error`: string (shows error message)
+- `class`: string
+
+**Features:**
+- Neumorphic inset shadows (light + dark)
+- Focus ring: blue glow (3px rgba(0, 102, 255, 0.2))
+- Error state: red border (2px solid)
+- Accessible: aria-invalid, aria-describedby
+
+### AnimatedLink (AnimatedLink.astro)
+
+Link with underline animation.
+
+```astro
+import AnimatedLink from '@/components/ui/AnimatedLink.astro';
+
+<!-- Internal link (uses getPath) -->
+<AnimatedLink href="/blog">Visit Blog</AnimatedLink>
+
+<!-- External link (adds icon) -->
+<AnimatedLink href="https://github.com" external>
+  GitHub
+</AnimatedLink>
+```
+
+**Props:**
+- `href`: string (required)
+- `external`: boolean (adds icon, target="_blank")
+- `class`: string
+
+**Features:**
+- Underline scales from left on hover
+- External links get icon + noopener noreferrer
+- Auto `getPath()` for internal links
+
+## Usage Examples
 
 ### Hero Section with Gradient
 ```astro
@@ -363,6 +537,20 @@ All animations/transitions disabled when user prefers reduced motion:
 <h1 style="font-size: var(--text-5xl); line-height: var(--leading-tight);">
   Vietnamese Heading
 </h1>
+```
+
+### CTA Section
+```astro
+import Button from '@/components/ui/Button.astro';
+
+<section class="gradient-primary section">
+  <div class="container">
+    <h2>Get Started Today</h2>
+    <Button variant="glass" size="lg" href="/contact">
+      Contact Us
+    </Button>
+  </div>
+</section>
 ```
 
 ## Notes for AI

@@ -1,0 +1,147 @@
+---
+/**
+ * Button component with multiple variants
+ * Variants: primary, secondary, glass, neuro
+ * Sizes: sm, md, lg
+ */
+interface Props {
+	variant?: 'primary' | 'secondary' | 'glass' | 'neuro';
+	size?: 'sm' | 'md' | 'lg';
+	href?: string;
+	type?: 'button' | 'submit' | 'reset';
+	disabled?: boolean;
+	class?: string;
+}
+
+const {
+	variant = 'primary',
+	size = 'md',
+	href,
+	type = 'button',
+	disabled = false,
+	class: className = ''
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const attrs = href
+	? { href }
+	: { type, disabled };
+---
+
+<Tag
+	class:list={['btn', `btn-${variant}`, `btn-${size}`, className]}
+	{...attrs}
+>
+	<slot />
+</Tag>
+
+<style>
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--space-2);
+		font-family: var(--font-sans);
+		font-weight: var(--font-semibold);
+		text-decoration: none;
+		border: none;
+		border-radius: var(--radius-lg);
+		cursor: pointer;
+		transition: all var(--transition-base);
+	}
+
+	.btn:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 2px;
+	}
+
+	.btn:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	/* Sizes */
+	.btn-sm {
+		padding: var(--space-2) var(--space-4);
+		font-size: var(--text-sm);
+	}
+
+	.btn-md {
+		padding: var(--space-3) var(--space-6);
+		font-size: var(--text-base);
+	}
+
+	.btn-lg {
+		padding: var(--space-4) var(--space-8);
+		font-size: var(--text-lg);
+	}
+
+	/* Primary variant */
+	.btn-primary {
+		background: var(--color-primary);
+		color: var(--color-white);
+	}
+
+	.btn-primary:hover:not(:disabled) {
+		background: var(--color-primary-dark);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.btn-primary:active:not(:disabled) {
+		transform: translateY(0);
+	}
+
+	/* Secondary variant */
+	.btn-secondary {
+		background: transparent;
+		color: var(--color-primary);
+		border: 2px solid var(--color-primary);
+	}
+
+	.btn-secondary:hover:not(:disabled) {
+		background: var(--color-primary);
+		color: var(--color-white);
+		transform: translateY(-2px);
+	}
+
+	/* Glass variant */
+	.btn-glass {
+		background: rgba(255, 255, 255, 0.15);
+		backdrop-filter: blur(var(--blur-md));
+		-webkit-backdrop-filter: blur(var(--blur-md));
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		color: var(--color-neutral-900);
+	}
+
+	.btn-glass:hover:not(:disabled) {
+		background: rgba(255, 255, 255, 0.25);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-glass);
+	}
+
+	/* Neuro variant */
+	.btn-neuro {
+		background: var(--color-neutral-100);
+		color: var(--color-neutral-800);
+		box-shadow: var(--shadow-neuro-light), var(--shadow-neuro-dark);
+	}
+
+	.btn-neuro:hover:not(:disabled) {
+		box-shadow: var(--shadow-neuro-light), 8px 8px 16px rgba(0, 0, 0, 0.18);
+	}
+
+	.btn-neuro:active:not(:disabled) {
+		box-shadow: var(--shadow-neuro-inset-light), var(--shadow-neuro-inset-dark);
+	}
+
+	/* Reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		.btn {
+			transition: none;
+		}
+		.btn:hover {
+			transform: none;
+		}
+	}
+</style>

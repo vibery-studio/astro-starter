@@ -94,11 +94,16 @@ Imported via: `src/styles/global.css`
 ```
 src/
 ├── components/
-│   ├── BaseHead.astro       # SEO, fonts, meta (Vietnamese)
-│   ├── Header.astro         # Navigation
-│   ├── Footer.astro
+│   ├── BaseHead.astro       # SEO, fonts, meta (Vietnamese) + ViewTransitions CSS
+│   ├── Header.astro         # Navigation with glassmorphism on scroll
+│   ├── Footer.astro         # Vietnamese company info
 │   ├── HeaderLink.astro
-│   └── FormattedDate.astro
+│   ├── FormattedDate.astro
+│   └── ui/                  # Phase 2: UI Component Library
+│       ├── Button.astro     # 4 variants (primary/secondary/glass/neuro), 3 sizes
+│       ├── Card.astro       # Glassmorphic with hover lift
+│       ├── Input.astro      # Neumorphic with error states
+│       └── AnimatedLink.astro # Underline animation + external icon
 ├── layouts/
 │   └── BlogPost.astro       # Blog post template (lang="vi")
 ├── pages/
@@ -164,8 +169,49 @@ public/
 - **Spacing:** 19 vars (8px scale + containers + radius)
 - **Effects:** 15 vars + 8 utility classes (shadows/transitions/blur/glass/neuro)
 
+## Phase 2 Status: ✅ Complete
+
+### UI Components (src/components/ui/)
+
+#### Button.astro
+- **Variants:** primary (blue gradient), secondary (outline), glass (frosted), neuro (soft)
+- **Sizes:** sm/md/lg
+- **Props:** href (renders as `<a>`), type, disabled, class
+- **Features:** Hover lift, focus-visible, disabled state, reduced motion support
+
+#### Card.astro
+- **Style:** Glassmorphic with backdrop-filter
+- **Props:** title, description, image (Astro.assets), href, class
+- **Features:** Image zoom on hover, link variant, responsive, reduced motion
+
+#### Input.astro
+- **Style:** Neumorphic inset shadows
+- **Types:** text/email/password/tel/url/number
+- **Props:** name, label, placeholder, required, disabled, value, error, class
+- **Features:** Error state, aria-invalid, focus ring, reduced motion
+
+#### AnimatedLink.astro
+- **Style:** Underline scale animation
+- **Props:** href, external (bool), class
+- **Features:** Auto getPath() for internal, external icon, focus-visible
+
+### Core Components (Rewritten)
+
+#### Header.astro
+- **Style:** Fixed header with glassmorphism on scroll (>50px)
+- **Features:** Mobile hamburger menu, Vietnamese labels, scroll detection
+- **Nav:** Trang chủ / Về chúng tôi / Blog / Liên hệ
+
+#### Footer.astro
+- **Content:** Vietnamese company info (COMPANY_NAME, EMAIL, PHONE, TAGLINE)
+- **Sections:** Dịch vụ, Công ty links
+- **Social:** Facebook/LinkedIn/GitHub icons
+- **Layout:** 3-column grid (desktop), stacked (mobile)
+
+#### BaseHead.astro
+- **Addition:** ViewTransitions CSS for page transitions
+
 ### Next Phases
-- Phase 2: Homepage hero + sections
-- Phase 3: Blog listing + post layout
-- Phase 4: Components (cards, buttons, navigation)
+- Phase 3: Homepage hero + sections
+- Phase 4: Blog listing + post layout
 - Phase 5: Content migration + CMS configuration

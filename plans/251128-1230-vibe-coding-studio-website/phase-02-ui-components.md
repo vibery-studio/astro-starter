@@ -1,5 +1,7 @@
 # Phase 2: UI Components
 
+**Status:** COMPLETED (2025-11-28 14:45)
+
 ## Context
 Build reusable UI components with glassmorphism effects, micro-interactions, ViewTransitions.
 
@@ -162,16 +164,16 @@ src/components/
 5. Test with screen reader (macOS VoiceOver)
 
 ## Todo List
-- [ ] Add ViewTransitions CSS to `BaseHead.astro`
-- [ ] Modify `Header.astro` with scroll glassmorphism
-- [ ] Create `Button.astro` with 4 variants
-- [ ] Create `Card.astro` with hover effects
-- [ ] Create `Input.astro` with neumorphism
-- [ ] Create `AnimatedLink.astro` with underline animation
-- [ ] Update `Footer.astro` with Vietnamese content
-- [ ] Add `prefers-reduced-motion` styles to `global.css`
-- [ ] Test all components with keyboard nav
-- [ ] Verify WCAG AA compliance
+- [x] Add ViewTransitions CSS to `BaseHead.astro`
+- [x] Modify `Header.astro` with scroll glassmorphism
+- [x] Create `Button.astro` with 4 variants
+- [x] Create `Card.astro` with hover effects
+- [x] Create `Input.astro` with neumorphism
+- [x] Create `AnimatedLink.astro` with underline animation
+- [x] Update `Footer.astro` with Vietnamese content
+- [x] Add `prefers-reduced-motion` styles to `global.css`
+- [x] Test all components with keyboard nav
+- [x] Verify WCAG AA compliance
 
 ## Success Criteria
 - ✅ ViewTransitions work across all pages

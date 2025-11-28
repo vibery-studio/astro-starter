@@ -1,0 +1,93 @@
+---
+/**
+ * Link with animated underline effect
+ */
+import { getPath } from '../../utils/paths';
+
+interface Props {
+	href: string;
+	external?: boolean;
+	class?: string;
+}
+
+const { href, external = false, class: className = '' } = Astro.props;
+
+const finalHref = external ? href : getPath(href);
+const externalAttrs = external
+	? { target: '_blank', rel: 'noopener noreferrer' }
+	: {};
+---
+
+<a href={finalHref} class:list={['animated-link', className]} {...externalAttrs}>
+	<slot />
+	{external && (
+		<svg
+			class="external-icon"
+			viewBox="0 0 16 16"
+			width="12"
+			height="12"
+			aria-hidden="true"
+		>
+			<path
+				fill="currentColor"
+				d="M6.22 8.72a.75.75 0 001.06 1.06l5.22-5.22v1.69a.75.75 0 001.5 0v-3.5a.75.75 0 00-.75-.75h-3.5a.75.75 0 000 1.5h1.69L6.22 8.72z"
+			/>
+			<path
+				fill="currentColor"
+				d="M3.5 6.75c0-.69.56-1.25 1.25-1.25H7A.75.75 0 007 4H4.75A2.75 2.75 0 002 6.75v4.5A2.75 2.75 0 004.75 14h4.5A2.75 2.75 0 0012 11.25V9a.75.75 0 00-1.5 0v2.25c0 .69-.56 1.25-1.25 1.25h-4.5c-.69 0-1.25-.56-1.25-1.25v-4.5z"
+			/>
+		</svg>
+	)}
+</a>
+
+<style>
+	.animated-link {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-1);
+		color: var(--color-primary);
+		text-decoration: none;
+		font-weight: var(--font-medium);
+		transition: color var(--transition-fast);
+	}
+
+	.animated-link::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background: var(--color-primary);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform var(--transition-base);
+	}
+
+	.animated-link:hover {
+		color: var(--color-primary-dark);
+	}
+
+	.animated-link:hover::after {
+		transform: scaleX(1);
+	}
+
+	.animated-link:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 4px;
+	}
+
+	.external-icon {
+		flex-shrink: 0;
+		opacity: 0.7;
+	}
+
+	/* Reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		.animated-link,
+		.animated-link::after {
+			transition: none;
+		}
+	}
+</style>

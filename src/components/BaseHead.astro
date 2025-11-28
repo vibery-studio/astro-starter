@@ -60,3 +60,35 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+<!-- ViewTransitions CSS (zero-JS approach) -->
+<style is:global>
+	@view-transition {
+		navigation: auto;
+	}
+
+	/* Smooth fade transition */
+	::view-transition-old(root) {
+		animation: vt-fade-out 0.25s ease-out forwards;
+	}
+	::view-transition-new(root) {
+		animation: vt-fade-in 0.25s ease-in forwards;
+	}
+
+	@keyframes vt-fade-out {
+		from { opacity: 1; }
+		to { opacity: 0; }
+	}
+	@keyframes vt-fade-in {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	/* Disable ViewTransitions for reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		::view-transition-old(root),
+		::view-transition-new(root) {
+			animation: none;
+		}
+	}
+</style>
