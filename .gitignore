@@ -23,5 +23,10 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# local planning files
+# local planning files and development files
 plans/
+.claude/
+.opencode/
+docs/
+CLAUDE.md
+PATH_HANDLING.md
