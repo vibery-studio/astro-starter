@@ -1,0 +1,45 @@
+/* Coffee Shop Theme - Warm Artisanal Vietnamese Coffee Culture */
+
+:root {
+  /* Warm cream base instead of OLED black */
+  --color-bg: #1A1512;  /* Dark roasted coffee */
+  --color-bg-elevated: #231E1A;
+  --color-bg-subtle: #2B2520;
+  --color-bg-card: #201B17;
+
+  /* Primary - Rich coffee brown */
+  --color-primary: #A0714D;  /* Cà phê sữa nâu */
+  --color-primary-light: #C49463;
+  --color-primary-dark: #795438;
+  --color-primary-glow: rgba(160, 113, 77, 0.4);
+
+  /* Accent - Condensed milk cream */
+  --color-accent: #E6D5C3;
+  --color-accent-light: #F2E8DC;
+  --color-accent-dark: #D4C1AC;
+  --color-accent-glow: rgba(230, 213, 195, 0.3);
+
+  /* Secondary - Deep espresso */
+  --color-secondary: #4A3428;
+  --color-secondary-light: #6B4E3D;
+
+  /* Text - Warm whites */
+  --color-text: #F5EFE7;
+  --color-text-secondary: #D4C1AC;
+  --color-text-muted: #A08976;
+
+  /* Borders - Warm tones */
+  --color-border: rgba(230, 213, 195, 0.12);
+  --color-border-glow: rgba(230, 213, 195, 0.25);
+
+  /* Glass - Warm frosted */
+  --glass-bg: rgba(35, 30, 26, 0.85);
+  --glass-border: rgba(230, 213, 195, 0.15);
+
+  /* Gradients */
+  --gradient-accent: linear-gradient(135deg, #A0714D 0%, #E6D5C3 100%);
+  --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(160, 113, 77, 0.2) 0%, transparent 50%);
+
+  /* Surface - for compatibility */
+  --color-surface: var(--color-bg);
+}

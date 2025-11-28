@@ -1,8 +1,8 @@
-/* Global styles for Vibe Coding Product Studio */
+/* Global styles for Coffee Shop */
 
 /* Import design tokens */
-@import './tokens/colors.css';
-@import './tokens/typography.css';
+@import './tokens/colors-coffee.css';
+@import './tokens/typography-coffee.css';
 @import './tokens/spacing.css';
 @import './tokens/effects.css';
 

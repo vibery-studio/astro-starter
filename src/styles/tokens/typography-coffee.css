@@ -1,0 +1,13 @@
+/* Coffee Shop Typography - Artisanal Serif + Clean Sans */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --font-display: 'Fraunces', serif;  /* Artisanal serif for headlines */
+  --font-sans: 'Work Sans', sans-serif;  /* Clean, warm sans */
+  --font-heading: var(--font-display);
+
+  /* Warmer letter-spacing */
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0.01em;
+}
