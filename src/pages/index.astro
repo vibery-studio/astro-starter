@@ -265,6 +265,14 @@ const locations = [
 		background: var(--color-bg);
 		color: var(--color-text);
 		font-family: var(--font-sans);
+		margin: 0;
+		padding: 0;
+	}
+
+	main {
+		margin: 0;
+		padding: 0;
+		width: 100%;
 	}
 
 	/* Container utilities */
@@ -306,6 +314,10 @@ const locations = [
 		align-items: center;
 		justify-content: center;
 		overflow: hidden;
+		/* Break out of main container - full width edge-to-edge */
+		width: 100vw;
+		margin-left: calc(-50vw + 50%);
+		margin-right: calc(-50vw + 50%);
 	}
 
 	.hero-background {
