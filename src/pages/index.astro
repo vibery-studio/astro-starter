@@ -265,16 +265,13 @@ const locations = [
 		background: var(--color-bg);
 		color: var(--color-text);
 		font-family: var(--font-sans);
-		margin: 0;
-		padding: 0;
-		overflow-x: hidden; /* Prevent horizontal scroll from full-width sections */
 	}
 
+	/* Override global main constraints for full-width hero */
 	main {
-		margin: 0;
+		max-width: none;
 		padding: 0;
-		width: 100%;
-		overflow-x: hidden; /* Prevent horizontal scroll */
+		margin: 0;
 	}
 
 	/* Container utilities */
@@ -311,18 +308,11 @@ const locations = [
 		position: relative;
 		height: 100vh;
 		min-height: 600px;
-		max-height: 900px; /* Cap height on large screens */
+		max-height: 900px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		overflow: hidden;
-		/* Full width edge-to-edge - simpler approach */
-		width: 100vw;
-		position: relative;
-		left: 50%;
-		right: 50%;
-		margin-left: -50vw;
-		margin-right: -50vw;
 	}
 
 	.hero-background {
