@@ -1,60 +1,64 @@
 ---
 /**
  * Home Page - Cà Phê Phin
- * Warm, artisanal Vietnamese coffee shop aesthetic
+ * Authentic Vietnamese coffee shop experience
+ * Photography-driven, warm, artisanal layout
  */
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import Button from '../components/ui/Button.astro';
-import { SITE_DESCRIPTION, SITE_TITLE, COMPANY_TAGLINE } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getPath } from '../utils/paths';
 
-const featuredDrinks = [
+const menuDrinks = [
 	{
-		number: '01',
 		name: 'Cà Phê Đen',
-		description: 'Cà phê robusta nguyên chất, pha phin truyền thống. Đậm đà, mạnh mẽ, hương vị Việt Nam.',
-		price: '30.000đ',
-		icon: '☕'
+		nameEn: 'Black Coffee',
+		description: 'Robusta nguyên chất pha phin, đậm đà mạnh mẽ',
+		price: '30.000',
+		popular: true
 	},
 	{
-		number: '02',
 		name: 'Cà Phê Sữa',
-		description: 'Cà phê phin kết hợp sữa đặc, ngọt ngào và mượt mà. Thức uống kinh điển.',
-		price: '35.000đ',
-		icon: '🥛'
+		nameEn: 'Coffee with Condensed Milk',
+		description: 'Cà phê phin truyền thống kết hợp sữa đặc',
+		price: '35.000',
+		popular: true
 	},
 	{
-		number: '03',
 		name: 'Bạc Xỉu',
-		description: 'Nhiều sữa, ít cà phê. Vị ngọt dịu nhẹ, thích hợp cho người mới bắt đầu.',
-		price: '35.000đ',
-		icon: '🤍'
+		nameEn: 'White Coffee',
+		description: 'Nhiều sữa, ít cà phê - ngọt ngào dịu nhẹ',
+		price: '35.000',
+		popular: false
+	},
+	{
+		name: 'Cà Phê Trứng',
+		nameEn: 'Egg Coffee',
+		description: 'Đặc sản Hà Nội - cà phê đen với kem trứng béo ngậy',
+		price: '45.000',
+		popular: true
 	}
 ];
 
-const highlights = [
-	{ value: '100%', label: 'Cà Phê Nguyên Chất', suffix: '' },
-	{ value: '15+', label: 'Năm Kinh Nghiệm', suffix: '' },
-	{ value: '3', label: 'Cơ Sở tại Sài Gòn', suffix: '' }
-];
-
-const atmosphere = [
+const locations = [
 	{
-		title: 'Không Gian Cổ Điển',
-		description: 'Gỗ ấm, ghế mây, nhạc vàng nhẹ nhàng. Như quay về thời xưa.',
-		icon: '🪵'
+		area: 'Quận 1',
+		name: 'Cơ Sở Nguyễn Huệ',
+		address: '123 Đường Nguyễn Huệ, Phường Bến Nghé',
+		hours: 'T2-CN: 7:00 - 22:00'
 	},
 	{
-		title: 'Pha Chế Thủ Công',
-		description: 'Mỗi ly cà phê được pha bằng phin truyền thống, từ từ, đúng nghệ thuật.',
-		icon: '⏱️'
+		area: 'Quận 3',
+		name: 'Cơ Sở Võ Văn Tần',
+		address: '456 Đường Võ Văn Tần, Phường 5',
+		hours: 'T2-CN: 7:00 - 22:00'
 	},
 	{
-		title: 'Hạt Cà Phê Tuyển Chọn',
-		description: 'Robusta Đắk Lắk, Arabica Đà Lạt. Rang xay mỗi ngày, hương thơm tự nhiên.',
-		icon: '🌿'
+		area: 'Quận 7',
+		name: 'Cơ Sở Phú Mỹ Hưng',
+		address: '789 Nguyễn Văn Linh, Tân Phú',
+		hours: 'T2-CN: 8:00 - 23:00'
 	}
 ];
 ---
@@ -64,254 +68,175 @@ const atmosphere = [
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body class="bg-[#1A1512] text-[#F5EFE7]">
+	<body>
 		<Header />
 		<main>
-			<!-- Hero Section -->
-			<section class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
-				<!-- Warm background glow -->
-				<div class="absolute -top-1/2 left-1/2 -translate-x-1/2 w-[150%] h-full bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(160,113,77,0.15)_0%,transparent_60%)] pointer-events-none"></div>
+			<!-- HERO: Full-width immersive photo space -->
+			<section class="hero-section">
+				<!-- Large background gradient placeholder (warm coffee browns) -->
+				<div class="hero-background"></div>
 
-				<!-- Coffee steam pattern -->
-				<div class="absolute inset-0 opacity-5">
-					<svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-						<defs>
-							<pattern id="coffee-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-								<path d="M50,10 Q60,30 50,50 T50,90" stroke="currentColor" stroke-width="1" fill="none" opacity="0.3"/>
-								<path d="M30,20 Q40,40 30,60 T30,95" stroke="currentColor" stroke-width="1" fill="none" opacity="0.2"/>
-								<path d="M70,15 Q80,35 70,55 T70,88" stroke="currentColor" stroke-width="1" fill="none" opacity="0.25"/>
-							</pattern>
-						</defs>
-						<rect width="100%" height="100%" fill="url(#coffee-pattern)" />
-					</svg>
-				</div>
-
-				<div class="relative w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-					<div class="text-center lg:text-left">
-						<!-- Badge -->
-						<div class="inline-flex items-center gap-2 px-4 py-2 bg-[#231E1A]/60 border border-[#E6D5C3]/20 rounded-full text-sm text-[#D4C1AC] mb-6 animate-fade-in backdrop-blur-sm">
-							<span class="w-2 h-2 bg-[#A0714D] rounded-full shadow-[0_0_12px_rgba(160,113,77,0.6)] animate-pulse"></span>
-							<span>Cà Phê Phin Truyền Thống</span>
-						</div>
-
-						<!-- Title -->
-						<h1 class="font-display text-[clamp(2.5rem,8vw,5.5rem)] font-bold leading-[0.95] tracking-tight mb-6 animate-fade-in-up">
-							Từng giọt <span class="text-gradient-coffee">cà phê</span><br />
-							trọn vẹn <span class="text-gradient-coffee">hương vị</span>
-						</h1>
-
-						<!-- Lead -->
-						<p class="text-lg md:text-xl text-[#D4C1AC] leading-relaxed max-w-lg mx-auto lg:mx-0 mb-8 animate-fade-in-up animation-delay-200">
-							{COMPANY_TAGLINE}. Pha phin thủ công, không gian ấm cúng, hương vị đậm đà của cà phê Việt Nam nguyên bản.
-						</p>
-
-						<!-- Actions -->
-						<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12 animate-fade-in-up animation-delay-300">
-							<Button href={getPath('/contact')} variant="primary" size="lg">
-								Ghé quán ngay
-								<svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-									<path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-							</Button>
-							<Button href={getPath('/about')} variant="ghost" size="lg">
-								Câu chuyện cà phê
-							</Button>
-						</div>
-
-						<!-- Opening hours -->
-						<div class="flex flex-col items-center lg:items-start gap-3 animate-fade-in animation-delay-400">
-							<span class="text-xs font-medium tracking-wider uppercase text-[#A08976]">Giờ mở cửa</span>
-							<div class="flex flex-wrap justify-center lg:justify-start gap-3">
-								<span class="inline-block px-4 py-2 bg-[#231E1A]/60 border border-[#E6D5C3]/15 rounded-full text-sm font-medium text-[#D4C1AC] backdrop-blur-sm">T2-T6: 7:00 - 22:00</span>
-								<span class="inline-block px-4 py-2 bg-[#231E1A]/60 border border-[#E6D5C3]/15 rounded-full text-sm font-medium text-[#D4C1AC] backdrop-blur-sm">T7-CN: 8:00 - 23:00</span>
-							</div>
-						</div>
+				<!-- Overlay content -->
+				<div class="hero-content">
+					<div class="hero-text">
+						<h1 class="hero-title">Cà Phê Phin</h1>
+						<p class="hero-tagline">Từng giọt cà phê, trọn vẹn hương vị Việt</p>
 					</div>
 
-					<!-- Phin Coffee Illustration -->
-					<div class="flex justify-center lg:justify-end animate-fade-in-scale animation-delay-500 order-first lg:order-last">
-						<div class="relative w-full max-w-md">
-							<!-- Coffee cup with placeholder gradient -->
-							<div class="relative aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-[#4A3428] via-[#6B4E3D] to-[#A0714D] shadow-2xl">
-								<!-- Phin filter icon overlay -->
-								<div class="absolute inset-0 flex items-center justify-center">
-									<div class="text-center text-[#E6D5C3]/30">
-										<div class="text-9xl mb-4">☕</div>
-										<p class="text-xl font-display font-semibold tracking-wide">Cà Phê Phin</p>
-										<p class="text-sm text-[#D4C1AC]/50 mt-2">Hương vị truyền thống Việt Nam</p>
+					<!-- Scroll indicator -->
+					<div class="scroll-indicator">
+						<div class="scroll-line"></div>
+						<span>Khám phá</span>
+					</div>
+				</div>
+			</section>
+
+			<!-- FEATURED DRINKS: Asymmetric 2-column masonry layout -->
+			<section class="menu-section">
+				<div class="container-wide">
+					<div class="section-header-offset">
+						<span class="eyebrow">Thức uống đặc sản</span>
+						<h2 class="section-title">Menu Cà Phê<br />Truyền Thống</h2>
+					</div>
+
+					<div class="drinks-masonry">
+						{menuDrinks.map((drink, i) => (
+							<article class={`drink-card ${i % 3 === 0 ? 'drink-card-tall' : ''}`}>
+								{drink.popular && (
+									<span class="badge-popular">Yêu thích</span>
+								)}
+								<div class="drink-content">
+									<h3 class="drink-name">{drink.name}</h3>
+									<p class="drink-name-en">{drink.nameEn}</p>
+									<p class="drink-description">{drink.description}</p>
+									<div class="drink-footer">
+										<span class="drink-price">{drink.price}đ</span>
+										<svg class="drink-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+											<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor" opacity="0.15"/>
+										</svg>
 									</div>
 								</div>
-								<!-- Steam effect -->
-								<div class="absolute top-10 left-1/2 -translate-x-1/2 w-32 h-64 opacity-20">
-									<div class="steam-line" style="--delay: 0s; left: 35%;"></div>
-									<div class="steam-line" style="--delay: 0.5s; left: 50%;"></div>
-									<div class="steam-line" style="--delay: 1s; left: 65%;"></div>
-								</div>
-							</div>
-							<!-- Glow effect -->
-							<div class="absolute inset-0 rounded-3xl shadow-[0_0_80px_rgba(160,113,77,0.3)] pointer-events-none"></div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Scroll indicator -->
-				<div class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block">
-					<div class="w-6 h-10 border-2 border-[#E6D5C3]/20 rounded-full flex justify-center pt-2">
-						<span class="w-1 h-2 bg-[#A0714D] rounded-full animate-[scrollBounce_2s_ease-in-out_infinite]"></span>
-					</div>
-				</div>
-			</section>
-
-			<!-- Highlights Strip -->
-			<section class="py-16 border-t border-b border-[#E6D5C3]/15">
-				<div class="container">
-					<div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-						{highlights.map((item) => (
-							<div class="text-center md:text-center p-4">
-								<span class="block font-display text-4xl md:text-5xl font-bold text-gradient-coffee mb-2">
-									{item.value}<span class="text-3xl">{item.suffix}</span>
-								</span>
-								<span class="text-sm text-[#A08976] uppercase tracking-wider">{item.label}</span>
-							</div>
-						))}
-					</div>
-				</div>
-			</section>
-
-			<!-- Featured Drinks Section -->
-			<section class="py-24" id="menu">
-				<div class="container">
-					<div class="mb-16 text-center">
-						<span class="block font-sans text-xs font-semibold tracking-widest uppercase text-[#A0714D] mb-4">Thức uống đặc trưng</span>
-						<h2 class="font-display text-4xl md:text-5xl font-bold leading-tight">
-							Menu <span class="text-gradient-coffee">Cà Phê</span>
-						</h2>
-					</div>
-
-					<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-						{featuredDrinks.map((drink, index) => (
-							<article class="group relative p-8 bg-[#201B17] border border-[#E6D5C3]/15 rounded-2xl transition-all duration-300 hover:border-[#A0714D] hover:-translate-y-1 overflow-hidden">
-								<div class="text-4xl mb-4">{drink.icon}</div>
-								<span class="absolute top-6 right-6 font-display text-sm text-[#A08976]">{drink.number}</span>
-								<h3 class="font-display text-xl font-semibold mb-3 transition-colors group-hover:text-[#A0714D]">{drink.name}</h3>
-								<p class="text-base text-[#D4C1AC] leading-relaxed mb-4 m-0">{drink.description}</p>
-								<div class="font-display text-2xl font-bold text-[#A0714D]">{drink.price}</div>
-								<!-- Hover glow -->
-								<div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(160,113,77,0.15)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 							</article>
 						))}
 					</div>
 				</div>
 			</section>
 
-			<!-- Atmosphere Section -->
-			<section class="relative py-24 overflow-hidden">
-				<div class="absolute inset-0 bg-[#0F0D0B]"></div>
-				<div class="container relative">
-					<div class="max-w-4xl mx-auto text-center">
-						<span class="block font-sans text-xs font-semibold tracking-widest uppercase text-[#A0714D] mb-4">Trải nghiệm</span>
-						<blockquote class="font-display text-2xl md:text-3xl font-medium leading-snug mb-16 border-none p-0">
-							"Cà phê không chỉ là thức uống—<br class="hidden md:block" />
-							đó là <em class="text-[#A0714D] not-italic">không gian</em>, là <em class="text-[#A0714D] not-italic">thời gian</em>,<br class="hidden md:block" />
-							là những câu chuyện được kể trong từng giọt phin."
-						</blockquote>
-
-						<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-							{atmosphere.map((item) => (
-								<div class="p-6 bg-[#201B17] border border-[#E6D5C3]/15 rounded-xl">
-									<div class="text-3xl mb-3">{item.icon}</div>
-									<h4 class="font-display text-lg font-semibold mb-2">{item.title}</h4>
-									<p class="text-sm text-[#D4C1AC] leading-relaxed m-0">{item.description}</p>
-								</div>
-							))}
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<!-- Location & Hours Section -->
-			<section class="py-24">
-				<div class="container">
-					<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-						<!-- Location -->
-						<div>
-							<span class="block font-sans text-xs font-semibold tracking-widest uppercase text-[#A0714D] mb-4">Địa điểm</span>
-							<h2 class="font-display text-4xl font-bold mb-6">
-								Ghé Thăm <span class="text-gradient-coffee">Chúng Tôi</span>
-							</h2>
-							<div class="space-y-4">
-								<div class="flex items-start gap-4 p-4 bg-[#201B17] border border-[#E6D5C3]/15 rounded-lg">
-									<span class="text-2xl">📍</span>
-									<div>
-										<h4 class="font-display font-semibold mb-1">Cơ Sở 1 - Quận 1</h4>
-										<p class="text-sm text-[#D4C1AC] m-0">123 Đường Nguyễn Huệ, P. Bến Nghé, Q.1, TP.HCM</p>
-									</div>
-								</div>
-								<div class="flex items-start gap-4 p-4 bg-[#201B17] border border-[#E6D5C3]/15 rounded-lg">
-									<span class="text-2xl">📍</span>
-									<div>
-										<h4 class="font-display font-semibold mb-1">Cơ Sở 2 - Quận 3</h4>
-										<p class="text-sm text-[#D4C1AC] m-0">456 Đường Võ Văn Tần, P.5, Q.3, TP.HCM</p>
-									</div>
-								</div>
-								<div class="flex items-start gap-4 p-4 bg-[#201B17] border border-[#E6D5C3]/15 rounded-lg">
-									<span class="text-2xl">📞</span>
-									<div>
-										<h4 class="font-display font-semibold mb-1">Liên Hệ</h4>
-										<p class="text-sm text-[#D4C1AC] m-0">+84 28 7777 8888</p>
-									</div>
-								</div>
+			<!-- OUR STORY: Side-by-side layout with text + image -->
+			<section class="story-section">
+				<div class="container-wide">
+					<div class="story-grid">
+						<!-- Text left -->
+						<div class="story-text">
+							<span class="eyebrow">Câu chuyện</span>
+							<h2 class="story-title">Bắt nguồn từ<br />niềm đam mê<br />cà phê Việt</h2>
+							<div class="story-content">
+								<p>Năm 2008, chúng tôi bắt đầu hành trình với một giấc mơ giản dơn: mang hương vị cà phê phin truyền thống Việt Nam đến gần hơn với mọi người.</p>
+								<p>Từ những hạt cà phê Robusta Đắk Lắk được chọn lọc kỹ càng, qua nghệ thuật pha phin thủ công từ từ, chúng tôi tạo nên không gian ấm cúng nơi mọi người có thể tạm dừng, thưởng thức, và kết nối.</p>
+								<p>Mỗi ly cà phê là một câu chuyện. Câu chuyện của chúng tôi là về truyền thống, về thời gian, và về tình yêu dành cho cà phê Việt Nam.</p>
 							</div>
-						</div>
-
-						<!-- Hours & Info -->
-						<div class="relative p-8 bg-[#201B17] border border-[#E6D5C3]/15 rounded-2xl">
-							<div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_0%,rgba(160,113,77,0.1)_0%,transparent_50%)] pointer-events-none rounded-2xl"></div>
-							<div class="relative">
-								<h3 class="font-display text-2xl font-bold mb-6">Giờ Mở Cửa</h3>
-								<div class="space-y-3 mb-8">
-									<div class="flex justify-between items-center py-3 border-b border-[#E6D5C3]/10">
-										<span class="font-medium">Thứ Hai - Thứ Sáu</span>
-										<span class="text-[#A0714D] font-display font-semibold">7:00 - 22:00</span>
-									</div>
-									<div class="flex justify-between items-center py-3 border-b border-[#E6D5C3]/10">
-										<span class="font-medium">Thứ Bảy - Chủ Nhật</span>
-										<span class="text-[#A0714D] font-display font-semibold">8:00 - 23:00</span>
-									</div>
-									<div class="flex justify-between items-center py-3">
-										<span class="font-medium">Ngày Lễ</span>
-										<span class="text-[#A0714D] font-display font-semibold">8:00 - 22:00</span>
-									</div>
-								</div>
-								<p class="text-sm text-[#D4C1AC] leading-relaxed italic m-0">
-									"Chúng tôi luôn chào đón bạn với một ly cà phê ấm và nụ cười thân thiện."
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<!-- CTA Section -->
-			<section class="relative py-24 overflow-hidden">
-				<div class="absolute -bottom-1/2 left-1/2 -translate-x-1/2 w-[150%] h-full bg-[radial-gradient(ellipse_50%_50%_at_50%_100%,rgba(160,113,77,0.12)_0%,transparent_60%)] pointer-events-none"></div>
-				<div class="container relative">
-					<div class="max-w-2xl mx-auto text-center">
-						<span class="block font-sans text-xs font-semibold tracking-widest uppercase text-[#A0714D] mb-4">Ghé thăm</span>
-						<h2 class="font-display text-4xl md:text-5xl font-bold leading-tight mb-6">
-							Hẹn gặp bạn tại<br /><span class="text-gradient-coffee">Cà Phê Phin</span>
-						</h2>
-						<p class="text-lg md:text-xl text-[#D4C1AC] mb-8">
-							Một ly cà phê, một câu chuyện, một khoảnh khắc đáng nhớ.
-						</p>
-						<div class="flex justify-center">
-							<Button href={getPath('/contact')} variant="primary" size="lg">
-								Xem địa chỉ
+							<a href={getPath('/about')} class="link-arrow">
+								Tìm hiểu thêm
 								<svg width="20" height="20" viewBox="0 0 20 20" fill="none">
 									<path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
-							</Button>
+							</a>
 						</div>
+
+						<!-- Image right (gradient placeholder) -->
+						<div class="story-image">
+							<div class="image-placeholder brewing">
+								<span class="image-label">Pha phin truyền thống</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- VISIT US: Unique location pins layout -->
+			<section class="locations-section">
+				<div class="container-wide">
+					<div class="section-header-center">
+						<span class="eyebrow">Địa điểm</span>
+						<h2 class="section-title">Ghé thăm quán</h2>
+						<p class="section-lead">3 cơ sở tại Sài Gòn, luôn chào đón bạn với cà phê ấm và nụ cười thân thiện</p>
+					</div>
+
+					<div class="locations-map">
+						{locations.map((location, i) => (
+							<div class={`location-pin pin-${i + 1}`}>
+								<div class="pin-marker">
+									<svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+										<path d="M16 4C11.0294 4 7 8.02944 7 13C7 19 16 28 16 28C16 28 25 19 25 13C25 8.02944 20.9706 4 16 4Z" fill="currentColor"/>
+										<circle cx="16" cy="13" r="3" fill="white"/>
+									</svg>
+								</div>
+								<div class="pin-card">
+									<span class="location-area">{location.area}</span>
+									<h3 class="location-name">{location.name}</h3>
+									<p class="location-address">{location.address}</p>
+									<p class="location-hours">{location.hours}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<!-- INSTAGRAM GALLERY: Photo grid -->
+			<section class="gallery-section">
+				<div class="container-wide">
+					<div class="gallery-header">
+						<div>
+							<span class="eyebrow">Instagram</span>
+							<h2 class="section-title">Không gian<br />& Khoảnh khắc</h2>
+						</div>
+						<a href="https://instagram.com/caphephin" target="_blank" class="instagram-link">
+							@caphephin
+							<svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+								<path d="M13 3H7C4.79086 3 3 4.79086 3 7V13C3 15.2091 4.79086 17 7 17H13C15.2091 17 17 15.2091 17 13V7C17 4.79086 15.2091 3 13 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M10 13C11.6569 13 13 11.6569 13 10C13 8.34315 11.6569 7 10 7C8.34315 7 7 8.34315 7 10C7 11.6569 8.34315 13 10 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</a>
+					</div>
+
+					<div class="gallery-grid">
+						<div class="gallery-item gallery-item-1">
+							<div class="image-placeholder coffee-cup">
+								<span class="image-label">Cà phê sữa nóng</span>
+							</div>
+						</div>
+						<div class="gallery-item gallery-item-2">
+							<div class="image-placeholder interior">
+								<span class="image-label">Không gian quán</span>
+							</div>
+						</div>
+						<div class="gallery-item gallery-item-3">
+							<div class="image-placeholder phin">
+								<span class="image-label">Phin truyền thống</span>
+							</div>
+						</div>
+						<div class="gallery-item gallery-item-4">
+							<div class="image-placeholder ambiance">
+								<span class="image-label">Bình minh Sài Gòn</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- CONTACT CTA: Warm invitation -->
+			<section class="cta-section">
+				<div class="container-wide">
+					<div class="cta-content">
+						<h2 class="cta-title">Hẹn gặp bạn<br />tại Cà Phê Phin</h2>
+						<p class="cta-text">Một ly cà phê, một câu chuyện, một khoảnh khắc đáng nhớ.</p>
+						<a href={getPath('/contact')} class="cta-button">
+							Xem địa chỉ & giờ mở cửa
+							<svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+								<path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</a>
 					</div>
 				</div>
 			</section>
@@ -321,87 +246,540 @@ const atmosphere = [
 </html>
 
 <style>
-	/* Coffee gradient */
-	.text-gradient-coffee {
-		background: linear-gradient(135deg, #A0714D 0%, #E6D5C3 100%);
+	/* Import coffee tokens */
+	@import '../styles/tokens/colors-coffee.css';
+	@import '../styles/tokens/typography-coffee.css';
+
+	/* Base */
+	body {
+		background: var(--color-bg);
+		color: var(--color-text);
+		font-family: var(--font-sans);
+	}
+
+	/* Container utilities */
+	.container-wide {
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 0 clamp(1rem, 5vw, 4rem);
+	}
+
+	.eyebrow {
+		font-family: var(--font-sans);
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-primary);
+		display: block;
+		margin-bottom: 1rem;
+	}
+
+	.section-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 6vw, 4rem);
+		font-weight: 700;
+		line-height: 1.1;
+		color: var(--color-text);
+		margin: 0;
+	}
+
+	/* ========================================
+	   HERO SECTION - Full viewport immersive
+	   ======================================== */
+	.hero-section {
+		position: relative;
+		height: 100vh;
+		min-height: 600px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+	}
+
+	.hero-background {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			135deg,
+			#4A3428 0%,
+			#6B4E3D 30%,
+			#A0714D 60%,
+			#C49463 100%
+		);
+		/* Warm overlay */
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(
+				ellipse at center,
+				rgba(26, 21, 18, 0.3) 0%,
+				rgba(26, 21, 18, 0.7) 100%
+			);
+		}
+	}
+
+	.hero-content {
+		position: relative;
+		z-index: 10;
+		text-align: center;
+		padding: 2rem;
+	}
+
+	.hero-title {
+		font-family: var(--font-display);
+		font-size: clamp(3rem, 10vw, 7rem);
+		font-weight: 700;
+		line-height: 0.95;
+		color: var(--color-accent);
+		margin: 0 0 1.5rem;
+		text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+	}
+
+	.hero-tagline {
+		font-family: var(--font-sans);
+		font-size: clamp(1rem, 2.5vw, 1.5rem);
+		font-weight: 300;
+		color: var(--color-accent-light);
+		margin: 0;
+		letter-spacing: 0.02em;
+	}
+
+	.scroll-indicator {
+		position: absolute;
+		bottom: 3rem;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--color-accent);
+		font-size: 0.75rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.scroll-line {
+		width: 1px;
+		height: 40px;
+		background: linear-gradient(to bottom, transparent, var(--color-accent));
+		animation: scrollPulse 2s ease-in-out infinite;
+	}
+
+	@keyframes scrollPulse {
+		0%, 100% { opacity: 0.3; transform: translateY(0); }
+		50% { opacity: 1; transform: translateY(10px); }
+	}
+
+	/* ========================================
+	   MENU SECTION - Asymmetric masonry
+	   ======================================== */
+	.menu-section {
+		padding: clamp(4rem, 10vw, 8rem) 0;
+		background: var(--color-bg);
+	}
+
+	.section-header-offset {
+		margin-bottom: 4rem;
+		padding-left: clamp(1rem, 3vw, 3rem);
+	}
+
+	.drinks-masonry {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		align-items: start;
+	}
+
+	.drink-card {
+		position: relative;
+		background: var(--color-bg-card);
+		border: 1px solid var(--color-border);
+		border-radius: 1.5rem;
+		padding: 2rem;
+		transition: all 0.3s ease;
+	}
+
+	.drink-card-tall {
+		padding: 3rem 2rem;
+	}
+
+	.drink-card:hover {
+		border-color: var(--color-primary);
+		transform: translateY(-4px);
+		box-shadow: 0 8px 24px rgba(160, 113, 77, 0.2);
+	}
+
+	.badge-popular {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		background: var(--color-primary);
+		color: var(--color-bg);
+		font-size: 0.625rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		padding: 0.25rem 0.75rem;
+		border-radius: 2rem;
+	}
+
+	.drink-name {
+		font-family: var(--font-display);
+		font-size: 1.75rem;
+		font-weight: 600;
+		color: var(--color-text);
+		margin: 0 0 0.25rem;
+	}
+
+	.drink-name-en {
+		font-size: 0.875rem;
+		color: var(--color-text-muted);
+		font-style: italic;
+		margin: 0 0 1rem;
+	}
+
+	.drink-description {
+		font-size: 0.9375rem;
+		line-height: 1.6;
+		color: var(--color-text-secondary);
+		margin: 0 0 1.5rem;
+	}
+
+	.drink-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.drink-price {
+		font-family: var(--font-display);
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: var(--color-primary);
+	}
+
+	.drink-icon {
+		color: var(--color-primary);
+		opacity: 0.3;
+	}
+
+	/* ========================================
+	   STORY SECTION - Side by side
+	   ======================================== */
+	.story-section {
+		padding: clamp(4rem, 10vw, 8rem) 0;
+		background: var(--color-bg-elevated);
+	}
+
+	.story-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: clamp(3rem, 8vw, 6rem);
+		align-items: center;
+	}
+
+	.story-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 5vw, 3.5rem);
+		line-height: 1.1;
+		margin: 0 0 2rem;
+	}
+
+	.story-content p {
+		font-size: 1.0625rem;
+		line-height: 1.75;
+		color: var(--color-text-secondary);
+		margin: 0 0 1.5rem;
+	}
+
+	.link-arrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-weight: 500;
+		color: var(--color-primary);
+		text-decoration: none;
+		margin-top: 1rem;
+		transition: gap 0.3s ease;
+	}
+
+	.link-arrow:hover {
+		gap: 1rem;
+	}
+
+	.story-image {
+		height: 100%;
+		min-height: 500px;
+	}
+
+	.image-placeholder {
+		width: 100%;
+		height: 100%;
+		border-radius: 1.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.image-placeholder.brewing {
+		background: linear-gradient(
+			165deg,
+			#6B4E3D 0%,
+			#4A3428 50%,
+			#2B2520 100%
+		);
+	}
+
+	.image-label {
+		font-family: var(--font-display);
+		font-size: 1.25rem;
+		color: var(--color-accent);
+		opacity: 0.4;
+		text-align: center;
+	}
+
+	/* ========================================
+	   LOCATIONS SECTION - Pin layout
+	   ======================================== */
+	.locations-section {
+		padding: clamp(4rem, 10vw, 8rem) 0;
+		background: var(--color-bg);
+	}
+
+	.section-header-center {
+		text-align: center;
+		margin-bottom: 4rem;
+	}
+
+	.section-lead {
+		font-size: 1.125rem;
+		line-height: 1.6;
+		color: var(--color-text-secondary);
+		max-width: 600px;
+		margin: 1.5rem auto 0;
+	}
+
+	.locations-map {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem;
+		padding: 2rem 0;
+	}
+
+	.location-pin {
+		position: relative;
+		text-align: center;
+	}
+
+	.pin-marker {
+		display: inline-flex;
+		color: var(--color-primary);
+		margin-bottom: 1rem;
+		animation: pinBounce 2s ease-in-out infinite;
+	}
+
+	@keyframes pinBounce {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-8px); }
+	}
+
+	.pin-card {
+		background: var(--color-bg-card);
+		border: 1px solid var(--color-border);
+		border-radius: 1rem;
+		padding: 1.5rem;
+		text-align: left;
+		transition: all 0.3s ease;
+	}
+
+	.location-pin:hover .pin-card {
+		border-color: var(--color-primary);
+		transform: translateY(-4px);
+	}
+
+	.location-area {
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--color-primary);
+		display: block;
+		margin-bottom: 0.5rem;
+	}
+
+	.location-name {
+		font-family: var(--font-display);
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: var(--color-text);
+		margin: 0 0 0.75rem;
+	}
+
+	.location-address,
+	.location-hours {
+		font-size: 0.875rem;
+		color: var(--color-text-secondary);
+		margin: 0.5rem 0;
+		line-height: 1.5;
+	}
+
+	/* ========================================
+	   GALLERY SECTION - Photo grid
+	   ======================================== */
+	.gallery-section {
+		padding: clamp(4rem, 10vw, 8rem) 0;
+		background: var(--color-bg-elevated);
+	}
+
+	.gallery-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		margin-bottom: 3rem;
+	}
+
+	.instagram-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 1.125rem;
+		font-weight: 500;
+		color: var(--color-primary);
+		text-decoration: none;
+		transition: gap 0.3s ease;
+	}
+
+	.instagram-link:hover {
+		gap: 1rem;
+	}
+
+	.gallery-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 1.5rem;
+	}
+
+	.gallery-item {
+		aspect-ratio: 1;
+		border-radius: 1rem;
+		overflow: hidden;
+	}
+
+	.image-placeholder.coffee-cup {
+		background: linear-gradient(135deg, #A0714D 0%, #C49463 100%);
+	}
+
+	.image-placeholder.interior {
+		background: linear-gradient(135deg, #4A3428 0%, #6B4E3D 100%);
+	}
+
+	.image-placeholder.phin {
+		background: linear-gradient(135deg, #6B4E3D 0%, #A0714D 100%);
+	}
+
+	.image-placeholder.ambiance {
+		background: linear-gradient(135deg, #E6D5C3 0%, #A0714D 100%);
+	}
+
+	/* ========================================
+	   CTA SECTION - Warm invitation
+	   ======================================== */
+	.cta-section {
+		padding: clamp(5rem, 12vw, 10rem) 0;
+		background: var(--color-bg);
+		text-align: center;
+	}
+
+	.cta-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 6vw, 4.5rem);
+		line-height: 1.1;
+		margin: 0 0 1.5rem;
+		background: var(--gradient-accent);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
 	}
 
-	/* Animations */
-	.animate-fade-in {
-		opacity: 0;
-		animation: fadeIn 0.8s ease-out forwards;
+	.cta-text {
+		font-size: 1.25rem;
+		color: var(--color-text-secondary);
+		margin: 0 0 2.5rem;
 	}
 
-	.animate-fade-in-up {
-		opacity: 0;
-		animation: fadeInUp 0.8s ease-out forwards;
+	.cta-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		font-family: var(--font-sans);
+		font-size: 1rem;
+		font-weight: 500;
+		color: var(--color-bg);
+		background: var(--color-primary);
+		padding: 1rem 2rem;
+		border-radius: 3rem;
+		text-decoration: none;
+		transition: all 0.3s ease;
+		border: 2px solid var(--color-primary);
 	}
 
-	.animate-fade-in-scale {
-		opacity: 0;
-		animation: fadeInScale 0.8s ease-out forwards;
+	.cta-button:hover {
+		background: transparent;
+		color: var(--color-primary);
+		gap: 1.25rem;
+		box-shadow: 0 0 30px rgba(160, 113, 77, 0.3);
 	}
 
-	.animation-delay-200 { animation-delay: 200ms; }
-	.animation-delay-300 { animation-delay: 300ms; }
-	.animation-delay-400 { animation-delay: 400ms; }
-	.animation-delay-500 { animation-delay: 500ms; }
-
-	@keyframes fadeIn {
-		from { opacity: 0; }
-		to { opacity: 1; }
-	}
-
-	@keyframes fadeInUp {
-		from { opacity: 0; transform: translateY(30px); }
-		to { opacity: 1; transform: translateY(0); }
-	}
-
-	@keyframes fadeInScale {
-		from { opacity: 0; transform: scale(0.95); }
-		to { opacity: 1; transform: scale(1); }
-	}
-
-	@keyframes scrollBounce {
-		0%, 100% { transform: translateY(0); opacity: 1; }
-		50% { transform: translateY(8px); opacity: 0.5; }
-	}
-
-	/* Steam effect */
-	.steam-line {
-		position: absolute;
-		width: 2px;
-		height: 60px;
-		background: linear-gradient(to top, rgba(230,213,195,0.4), transparent);
-		animation: steam 3s ease-in-out infinite;
-		animation-delay: var(--delay, 0s);
-	}
-
-	@keyframes steam {
-		0% {
-			transform: translateY(0) scaleY(1);
-			opacity: 0;
+	/* ========================================
+	   RESPONSIVE
+	   ======================================== */
+	@media (max-width: 1024px) {
+		.story-grid {
+			grid-template-columns: 1fr;
+			gap: 3rem;
 		}
-		50% {
-			opacity: 0.6;
+
+		.story-image {
+			min-height: 400px;
 		}
-		100% {
-			transform: translateY(-100px) scaleY(1.5);
-			opacity: 0;
+
+		.locations-map {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.pin-marker {
+			animation: none;
+		}
+
+		.gallery-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 640px) {
+		.drinks-masonry {
+			grid-template-columns: 1fr;
+		}
+
+		.gallery-header {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1.5rem;
 		}
 	}
 
 	/* Reduced motion */
 	@media (prefers-reduced-motion: reduce) {
-		.animate-fade-in,
-		.animate-fade-in-up,
-		.animate-fade-in-scale,
-		.steam-line {
+		.scroll-line,
+		.pin-marker {
 			animation: none;
-			opacity: 1;
 		}
 	}
 </style>
