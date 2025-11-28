@@ -1,0 +1,25 @@
+backend:
+  name: github
+  repo: owner/astro-coffee-shop-vn  # Update after fork: yourname/astro-coffee-shop-vn
+  branch: main
+
+# Decap CMS configuration for Coffee Shop
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+locale: 'vi'
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    label_singular: "Bài viết"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    description: "Quản lý bài viết blog về cà phê Việt Nam"
+    fields:
+      - { label: "Tiêu đề", name: "title", widget: "string", hint: "Tiêu đề bài viết (hiển thị trên trang)" }
+      - { label: "Mô tả", name: "description", widget: "string", hint: "Mô tả ngắn cho SEO (150-160 ký tự)" }
+      - { label: "Ngày xuất bản", name: "pubDate", widget: "datetime", format: "MMM DD YYYY", date_format: "DD/MM/YYYY", time_format: false }
+      - { label: "Hình ảnh hero", name: "heroImage", widget: "image", required: false, hint: "Hình ảnh đại diện bài viết (ratio 16:9)" }
+      - { label: "Nội dung", name: "body", widget: "markdown" }
