@@ -143,11 +143,13 @@ const locations = [
 							</a>
 						</div>
 
-						<!-- Image right (gradient placeholder) -->
+						<!-- Image right (Unsplash real photo) -->
 						<div class="story-image">
-							<div class="image-placeholder brewing">
-								<span class="image-label">Pha phin truyền thống</span>
-							</div>
+							<img
+								src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=800&q=80"
+								alt="Traditional Vietnamese phin coffee brewing"
+								class="story-photo"
+							/>
 						</div>
 					</div>
 				</div>
@@ -202,24 +204,32 @@ const locations = [
 
 					<div class="gallery-grid">
 						<div class="gallery-item gallery-item-1">
-							<div class="image-placeholder coffee-cup">
-								<span class="image-label">Cà phê sữa nóng</span>
-							</div>
+							<img
+								src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80"
+								alt="Cà phê sữa nóng"
+								class="gallery-photo"
+							/>
 						</div>
 						<div class="gallery-item gallery-item-2">
-							<div class="image-placeholder interior">
-								<span class="image-label">Không gian quán</span>
-							</div>
+							<img
+								src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80"
+								alt="Không gian quán cà phê"
+								class="gallery-photo"
+							/>
 						</div>
 						<div class="gallery-item gallery-item-3">
-							<div class="image-placeholder phin">
-								<span class="image-label">Phin truyền thống</span>
-							</div>
+							<img
+								src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&q=80"
+								alt="Phin truyền thống"
+								class="gallery-photo"
+							/>
 						</div>
 						<div class="gallery-item gallery-item-4">
-							<div class="image-placeholder ambiance">
-								<span class="image-label">Bình minh Sài Gòn</span>
-							</div>
+							<img
+								src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80"
+								alt="Bình minh cà phê"
+								class="gallery-photo"
+							/>
 						</div>
 					</div>
 				</div>
@@ -291,6 +301,7 @@ const locations = [
 		position: relative;
 		height: 100vh;
 		min-height: 600px;
+		max-height: 900px; /* Cap height on large screens */
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -300,22 +311,21 @@ const locations = [
 	.hero-background {
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(
-			135deg,
-			#4A3428 0%,
-			#6B4E3D 30%,
-			#A0714D 60%,
-			#C49463 100%
-		);
+		/* Unsplash: Vietnamese coffee with phin filter - Photo by Quang Nguyen Vinh */
+		background-image: url('https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=1920&q=80');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
 		/* Warm overlay */
 		&::after {
 			content: '';
 			position: absolute;
 			inset: 0;
-			background: radial-gradient(
-				ellipse at center,
-				rgba(26, 21, 18, 0.3) 0%,
-				rgba(26, 21, 18, 0.7) 100%
+			background: linear-gradient(
+				135deg,
+				rgba(74, 52, 40, 0.85) 0%,
+				rgba(107, 78, 61, 0.75) 50%,
+				rgba(160, 113, 77, 0.65) 100%
 			);
 		}
 	}
@@ -685,6 +695,15 @@ const locations = [
 
 	.image-placeholder.ambiance {
 		background: linear-gradient(135deg, #E6D5C3 0%, #A0714D 100%);
+	}
+
+	/* Real photo styling */
+	.story-photo,
+	.gallery-photo {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 1.5rem;
 	}
 
 	/* ========================================
