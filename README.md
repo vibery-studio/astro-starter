@@ -52,7 +52,13 @@ Production-ready Astro blog with Decap CMS, configured for deployment to both Gi
    - Go to repo Settings → Pages
    - Source: GitHub Actions
 
-4. **Deploy:**
+4. **Enable Workflow (CRITICAL):**
+   ```bash
+   gh workflow enable deploy-github-pages.yml
+   ```
+   **Why**: Workflows are disabled by default when forked
+
+5. **Deploy:**
    - Push to `main` branch
    - Automatic deployment via `.github/workflows/deploy-github-pages.yml`
 

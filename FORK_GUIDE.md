@@ -37,7 +37,28 @@ const GITHUB_REPO = 'your-repo-name';
 2. **Source**: Deploy from a branch → Change to **GitHub Actions**
 3. Save
 
-### 4. Deploy
+### 4. Enable GitHub Actions Workflow (CRITICAL)
+
+**⚠️ IMPORTANT**: GitHub Actions workflows are **disabled by default** when forked.
+
+**Enable via CLI** (Recommended):
+```bash
+gh workflow enable deploy-github-pages.yml
+```
+
+**OR Enable via GitHub UI**:
+1. Go to **Actions** tab
+2. Click "I understand my workflows, go ahead and enable them"
+3. Find "Deploy to GitHub Pages" workflow
+4. Click "Enable workflow" if shown
+
+**Verify it's enabled**:
+```bash
+gh workflow list
+# Should show: Deploy to GitHub Pages - active
+```
+
+### 5. Deploy
 
 Push to `main` branch:
 ```bash
@@ -90,7 +111,8 @@ PUBLIC_FORMSPREE_ID=xpwabcde
 
 - [ ] Update `GITHUB_USERNAME` in `.env` or `astro.config.mjs`
 - [ ] Update `GITHUB_REPO` in `.env` or `astro.config.mjs`
-- [ ] Enable GitHub Pages in repo Settings
+- [ ] Enable GitHub Pages in repo Settings (Source: GitHub Actions)
+- [ ] Enable GitHub Actions workflow (via CLI or UI)
 - [ ] Setup Decap CMS authentication (Netlify Identity or GitHub OAuth)
 
 ### Optional Changes
@@ -137,9 +159,14 @@ Your content here...
 **Symptom**: Site shows 404 after deployment
 
 **Fix**:
-1. Check **Settings** → **Pages** → Source is **GitHub Actions**
-2. Check Actions tab for failed builds
-3. Verify `GITHUB_USERNAME` and `GITHUB_REPO` match your repo
+1. **Most Common**: Workflow is disabled
+   ```bash
+   gh workflow enable deploy-github-pages.yml
+   gh workflow run deploy-github-pages.yml
+   ```
+2. Check **Settings** → **Pages** → Source is **GitHub Actions**
+3. Check Actions tab for workflow runs (should see "Deploy to GitHub Pages")
+4. Verify `GITHUB_USERNAME` and `GITHUB_REPO` match your repo
 
 ### Broken Images/Links
 
