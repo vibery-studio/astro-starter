@@ -2,7 +2,6 @@
 title: "Cách Pha Cà Phê Phin Ngon Đúng Chuẩn"
 description: "Bí quyết pha cà phê phin truyền thống Việt Nam đậm đà, thơm ngon từ những người thợ pha chuyên nghiệp"
 pubDate: "Nov 15 2025"
-heroImage: "/images/uploads/pha-ca-phe-phin.jpg"
 ---
 
 Cà phê phin không chỉ là thức uống, mà còn là nghệ thuật và văn hóa của người Việt. Để có một ly cà phê phin đúng chuẩn, bạn cần nắm vững những bí quyết sau.

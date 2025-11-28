@@ -1,63 +1,325 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+/**
+ * About Page - Cà Phê Phin
+ * Coffee origin story, brewing philosophy, and values
+ */
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Button from '../components/ui/Button.astro';
+import { SITE_TITLE, COMPANY_NAME, COMPANY_TAGLINE } from '../consts';
+import { getPath } from '../utils/paths';
+
+const pageTitle = `Về Chúng Tôi | ${SITE_TITLE}`;
+const pageDescription = 'Câu chuyện về Cà Phê Phin - hành trình từ hạt cà phê nguyên chất đến ly cà phê phin truyền thống Việt Nam.';
+
+const values = [
+	{
+		title: 'Nguyên Chất',
+		description: 'Chỉ sử dụng 100% hạt cà phê nguyên chất, không pha trộn tạp chất.',
+		icon: '✨'
+	},
+	{
+		title: 'Thủ Công',
+		description: 'Mỗi ly cà phê được pha bằng phin, từ từ, tỉ mỉ theo nghệ thuật truyền thống.',
+		icon: '☕'
+	},
+	{
+		title: 'Tận Tâm',
+		description: 'Phục vụ khách hàng như người thân, tạo không gian ấm cúng như ở nhà.',
+		icon: '❤️'
+	},
+	{
+		title: 'Văn Hóa',
+		description: 'Gìn giữ và lan tỏa văn hóa cà phê phin truyền thống Việt Nam.',
+		icon: '🇻🇳'
+	}
+];
+
+const milestones = [
+	{ year: '2008', event: 'Khởi Đầu', description: 'Quán cà phê nhỏ đầu tiên mở cửa tại Quận 1, Sài Gòn.' },
+	{ year: '2015', event: 'Mở Rộng', description: 'Khai trương chi nhánh thứ 2 tại Quận 3, đáp ứng nhu cầu khách hàng.' },
+	{ year: '2025', event: 'Hiện Tại', description: '3 cơ sở, phục vụ hàng nghìn khách hàng mỗi ngày với chất lượng nhất quán.' }
+];
+
+const brewingSteps = [
+	{ title: 'Chọn Hạt', desc: 'Robusta Đắk Lắk, Arabica Đà Lạt - tuyển chọn kỹ càng từng hạt.' },
+	{ title: 'Rang Xay', desc: 'Rang mỗi ngày, xay theo đơn đặt hàng, giữ trọn hương thơm tự nhiên.' },
+	{ title: 'Pha Phin', desc: 'Dùng phin truyền thống, nước nóng 92-96°C, từ từ nhỏ giọt.' },
+	{ title: 'Thưởng Thức', desc: 'Đen hoặc thêm sữa đặc, nóng hoặc đá - tùy theo sở thích của bạn.' }
+];
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="vi">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} />
+	</head>
+	<body class="bg-[#1A1512] text-[#F5EFE7]">
+		<Header />
+		<main>
+			<!-- Hero Section -->
+			<section class="relative pt-[calc(6rem+60px)] pb-16 overflow-hidden">
+				<div class="absolute -top-1/2 left-1/2 -translate-x-1/2 w-[150%] h-full bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(160,113,77,0.15)_0%,transparent_60%)] pointer-events-none"></div>
+				<div class="relative max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					<div class="text-center">
+						<span class="block font-sans text-xs font-semibold tracking-[0.1em] uppercase text-[#A0714D] mb-4">Về chúng tôi</span>
+						<h1 class="font-display text-4xl md:text-5xl font-bold mb-4">
+							Câu chuyện của<br /><span class="text-gradient-coffee">Cà Phê Phin</span>
+						</h1>
+						<p class="text-xl text-[#D4C1AC]">{COMPANY_TAGLINE}</p>
+					</div>
+				</div>
+			</section>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+			<!-- Story Section -->
+			<section class="py-20 border-t border-[#E6D5C3]/15">
+				<div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					<div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 items-center">
+						<div>
+							<span class="block font-sans text-xs font-semibold tracking-[0.1em] uppercase text-[#A0714D] mb-4">Hành trình</span>
+							<h2 class="font-display text-4xl font-bold text-[#F5EFE7] mb-4">Từ Hạt Cà Phê Đến Ly Cà Phê Phin</h2>
+							<p class="text-lg leading-relaxed text-[#D4C1AC] mb-4">
+								<strong class="text-[#F5EFE7]">{COMPANY_NAME}</strong> được thành lập vào năm 2008 bởi một nhóm bạn trẻ
+								đam mê cà phê Việt Nam và muốn gìn giữ nghệ thuật pha cà phê phin truyền thống.
+							</p>
+							<p class="text-lg leading-relaxed text-[#D4C1AC] mb-4">
+								Trong thời đại cà phê máy và cà phê hòa tan phát triển,
+								chúng tôi tin rằng <strong class="text-[#F5EFE7]">cà phê phin</strong> không chỉ là một thức uống,
+								mà là một phần văn hóa, là nghệ thuật thưởng thức sự chậm rãi và tận hưởng khoảnh khắc.
+							</p>
+							<p class="text-lg leading-relaxed text-[#D4C1AC] m-0">
+								Từ quán nhỏ đầu tiên với vài chiếc bàn gỗ cũ và mùi hương cà phê ngào ngạt,
+								chúng tôi đã phát triển thành 3 cơ sở tại Sài Gòn, nhưng vẫn giữ nguyên tâm huyết:
+								<em>mỗi ly cà phê đều được pha với trái tim</em>.
+							</p>
+						</div>
+						<div>
+							<div class="relative p-8 bg-[#201B17] border border-[#E6D5C3]/15 rounded-xl border-l-4 border-l-[#A0714D] overflow-hidden">
+								<div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_0%,rgba(160,113,77,0.1)_0%,transparent_50%)] pointer-events-none"></div>
+								<blockquote class="relative font-sans text-lg italic text-[#D4C1AC] leading-relaxed mb-4 m-0 border-0 p-0">
+									"Cà phê phin không vội, không gấp. Đợi từng giọt rơi,
+									thưởng thức từng ngụm - đó là cách người Việt tận hưởng cuộc sống."
+								</blockquote>
+								<cite class="relative text-sm text-[#A08976] not-italic">— Triết lý của Cà Phê Phin</cite>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+			<!-- Values Section -->
+			<section class="py-20 bg-[#0F0D0B]">
+				<div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					<div class="text-center mb-12">
+						<span class="block font-sans text-xs font-semibold tracking-[0.1em] uppercase text-[#A0714D] mb-4">Giá trị</span>
+						<h2 class="font-display text-4xl font-bold text-[#F5EFE7] mb-4">Cam Kết Của <span class="text-gradient-coffee">Chúng Tôi</span></h2>
+						<p class="text-lg text-[#D4C1AC] m-0">
+							Những nguyên tắc không bao giờ thay đổi trong từng ly cà phê
+						</p>
+					</div>
+					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+						{values.map((value) => (
+							<div class="group relative p-6 bg-[#201B17] border border-[#E6D5C3]/15 rounded-xl text-center transition-all duration-300 overflow-hidden hover:border-[#A0714D] hover:-translate-y-1">
+								<span class="text-4xl block mb-4">{value.icon}</span>
+								<h3 class="font-display text-lg font-semibold mb-2">{value.title}</h3>
+								<p class="text-sm text-[#D4C1AC] leading-relaxed m-0">{value.description}</p>
+								<div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(160,113,77,0.1)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+			<!-- Brewing Philosophy Section -->
+			<section class="py-20">
+				<div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+						<div>
+							<div class="flex flex-col gap-4 p-8 bg-[#0F0D0B] border border-[#E6D5C3]/15 rounded-2xl">
+								<div class="flex items-center gap-4 p-4 bg-[#201B17] border border-[#E6D5C3]/15 rounded-lg">
+									<div class="flex items-center justify-center w-12 h-12 bg-[#0F0D0B] rounded-md text-2xl flex-shrink-0">🌱</div>
+									<div class="flex flex-col">
+										<strong class="text-base text-[#F5EFE7]">Chọn Hạt</strong>
+										<span class="text-sm text-[#D4C1AC]">Tuyển chọn hạt nguyên chất</span>
+									</div>
+								</div>
+								<div class="w-0.5 h-4 bg-[#A0714D] ml-6 shadow-[0_0_8px_rgba(160,113,77,0.5)]"></div>
+								<div class="flex items-center gap-4 p-4 bg-[#201B17] border border-[#E6D5C3]/15 rounded-lg">
+									<div class="flex items-center justify-center w-12 h-12 bg-[#0F0D0B] rounded-md text-2xl flex-shrink-0">🔥</div>
+									<div class="flex flex-col">
+										<strong class="text-base text-[#F5EFE7]">Rang Xay</strong>
+										<span class="text-sm text-[#D4C1AC]">Rang mỗi ngày, xay tươi</span>
+									</div>
+								</div>
+								<div class="w-0.5 h-4 bg-[#A0714D] ml-6 shadow-[0_0_8px_rgba(160,113,77,0.5)]"></div>
+								<div class="flex items-center gap-4 p-4 bg-[#201B17] border border-[#E6D5C3]/15 rounded-lg">
+									<div class="flex items-center justify-center w-12 h-12 bg-[#0F0D0B] rounded-md text-2xl flex-shrink-0">☕</div>
+									<div class="flex flex-col">
+										<strong class="text-base text-[#F5EFE7]">Pha Phin</strong>
+										<span class="text-sm text-[#D4C1AC]">Thủ công, từng giọt</span>
+									</div>
+								</div>
+								<div class="w-0.5 h-4 bg-[#A0714D] ml-6 shadow-[0_0_8px_rgba(160,113,77,0.5)]"></div>
+								<div class="flex items-center gap-4 p-4 bg-[#201B17] border border-[#E6D5C3]/15 rounded-lg">
+									<div class="flex items-center justify-center w-12 h-12 bg-[#0F0D0B] rounded-md text-2xl flex-shrink-0">✨</div>
+									<div class="flex flex-col">
+										<strong class="text-base text-[#F5EFE7]">Thưởng Thức</strong>
+										<span class="text-sm text-[#D4C1AC]">Hương vị trọn vẹn</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<span class="block font-sans text-xs font-semibold tracking-[0.1em] uppercase text-[#A0714D] mb-4">Quy trình</span>
+							<h2 class="font-display text-4xl font-bold text-[#F5EFE7] mb-4">Nghệ Thuật <span class="text-gradient-coffee">Pha Phin</span></h2>
+							<p class="text-lg text-[#D4C1AC] mb-6">
+								Pha cà phê phin không chỉ là kỹ thuật, mà là nghệ thuật.
+								Chúng tôi tuân thủ quy trình truyền thống từ nhiều thế hệ:
+							</p>
+							<ul class="list-none p-0 m-0">
+								{brewingSteps.map((step) => (
+									<li class="py-4 text-base text-[#D4C1AC] leading-relaxed border-b border-[#E6D5C3]/10 last:border-0">
+										<strong class="text-[#F5EFE7]">{step.title}:</strong> {step.desc}
+									</li>
+								))}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+			<!-- Timeline Section -->
+			<section class="py-20 bg-[#0F0D0B]">
+				<div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					<div class="text-center mb-12">
+						<span class="block font-sans text-xs font-semibold tracking-[0.1em] uppercase text-[#A0714D] mb-4">Hành trình</span>
+						<h2 class="font-display text-4xl font-bold text-[#F5EFE7]">Những <span class="text-gradient-coffee">Dấu Mốc</span></h2>
+					</div>
+					<div class="max-w-[700px] mx-auto">
+						{milestones.map((milestone) => (
+							<div class="flex gap-6 mb-6 last:mb-0">
+								<div class="flex-shrink-0 w-20 text-right">
+									<span class="font-display text-lg font-bold text-gradient-coffee">{milestone.year}</span>
+								</div>
+								<div class="flex-1 p-6 bg-[#201B17] border border-[#E6D5C3]/15 rounded-lg">
+									<h3 class="font-display text-lg font-semibold mb-2">{milestone.event}</h3>
+									<p class="text-base text-[#D4C1AC] m-0">{milestone.description}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<!-- Coffee Origins Section -->
+			<section class="py-20">
+				<div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					<div class="text-center mb-12">
+						<span class="block font-sans text-xs font-semibold tracking-[0.1em] uppercase text-[#A0714D] mb-4">Nguồn gốc</span>
+						<h2 class="font-display text-4xl font-bold text-[#F5EFE7] mb-4">Hạt Cà Phê <span class="text-gradient-coffee">Việt Nam</span></h2>
+						<p class="text-lg text-[#D4C1AC] max-w-2xl mx-auto">
+							Chúng tôi chỉ sử dụng hạt cà phê nguyên chất từ những vùng trồng cà phê nổi tiếng nhất Việt Nam
+						</p>
+					</div>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+						<div class="p-8 bg-[#201B17] border border-[#E6D5C3]/15 rounded-2xl">
+							<div class="text-4xl mb-4">🏔️</div>
+							<h3 class="font-display text-2xl font-bold mb-3">Robusta Đắk Lắk</h3>
+							<p class="text-base text-[#D4C1AC] leading-relaxed mb-4">
+								Hạt cà phê robusta từ cao nguyên Đắk Lắk, nơi có khí hậu và đất đỏ bazan lý tưởng.
+								Vị đắng mạnh mẽ, hậu ngọt đặc trưng, caffeine cao.
+							</p>
+							<ul class="list-none p-0 m-0 space-y-2">
+								<li class="flex items-center gap-2 text-sm text-[#D4C1AC]">
+									<span class="text-[#A0714D]">✓</span>
+									<span>Vị đắng đậm đà</span>
+								</li>
+								<li class="flex items-center gap-2 text-sm text-[#D4C1AC]">
+									<span class="text-[#A0714D]">✓</span>
+									<span>Hương thơm đặc trưng</span>
+								</li>
+								<li class="flex items-center gap-2 text-sm text-[#D4C1AC]">
+									<span class="text-[#A0714D]">✓</span>
+									<span>Caffeine cao, tỉnh táo</span>
+								</li>
+							</ul>
+						</div>
+						<div class="p-8 bg-[#201B17] border border-[#E6D5C3]/15 rounded-2xl">
+							<div class="text-4xl mb-4">🌄</div>
+							<h3 class="font-display text-2xl font-bold mb-3">Arabica Đà Lạt</h3>
+							<p class="text-base text-[#D4C1AC] leading-relaxed mb-4">
+								Hạt arabica từ Đà Lạt, trồng ở độ cao 1500m.
+								Vị chua nhẹ dễ chịu, hương thơm phức tạp, độ caffeine vừa phải.
+							</p>
+							<ul class="list-none p-0 m-0 space-y-2">
+								<li class="flex items-center gap-2 text-sm text-[#D4C1AC]">
+									<span class="text-[#A0714D]">✓</span>
+									<span>Vị chua thanh tao</span>
+								</li>
+								<li class="flex items-center gap-2 text-sm text-[#D4C1AC]">
+									<span class="text-[#A0714D]">✓</span>
+									<span>Hương hoa quả tinh tế</span>
+								</li>
+								<li class="flex items-center gap-2 text-sm text-[#D4C1AC]">
+									<span class="text-[#A0714D]">✓</span>
+									<span>Dễ uống, êm dịu</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- CTA Section -->
+			<section class="relative py-20 overflow-hidden">
+				<div class="absolute -bottom-1/2 left-1/2 -translate-x-1/2 w-[150%] h-full bg-[radial-gradient(ellipse_50%_50%_at_50%_100%,rgba(160,113,77,0.12)_0%,transparent_60%)] pointer-events-none"></div>
+				<div class="relative max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					<div class="text-center max-w-[600px] mx-auto">
+						<span class="block font-sans text-xs font-semibold tracking-[0.1em] uppercase text-[#A0714D] mb-4">Ghé thăm</span>
+						<h2 class="font-display text-4xl font-bold mb-4">
+							Thưởng Thức<br /><span class="text-gradient-coffee">Cà Phê Phin Nguyên Bản</span>
+						</h2>
+						<p class="text-lg text-[#D4C1AC] mb-8">
+							Hãy đến và trải nghiệm nghệ thuật pha cà phê phin truyền thống Việt Nam.
+						</p>
+						<div class="flex gap-4 justify-center flex-wrap">
+							<Button href={getPath('/contact')} variant="primary" size="lg">
+								Xem Địa Chỉ
+								<svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+									<path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</Button>
+							<Button href={getPath('/blog')} variant="ghost" size="lg">
+								Đọc Blog
+							</Button>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* Coffee gradient */
+	.text-gradient-coffee {
+		background: linear-gradient(135deg, #A0714D 0%, #E6D5C3 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	/* Reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		.transition-all,
+		.transition-opacity {
+			transition: none;
+		}
+
+		.hover\:-translate-y-1:hover {
+			transform: none;
+		}
+	}
+</style>

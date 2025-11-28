@@ -1,12 +1,19 @@
 ---
+/**
+ * Blog Listing Page - Dark OLED Luxury (Tailwind)
+ * Clean, sophisticated, with subtle glow accents
+ */
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { SITE_TITLE } from '../../consts';
 import { getPath } from '../../utils/paths';
+
+const pageTitle = `Blog | ${SITE_TITLE}`;
+const pageDescription = 'Chia sẻ về văn hóa cà phê Việt Nam, nghệ thuật pha phin, và những câu chuyện thú vị xung quanh tách cà phê.';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -16,100 +23,141 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="vi">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
+		<BaseHead title={pageTitle} description={pageDescription} />
 	</head>
-	<body>
+	<body class="bg-[#1A1512] text-[#F5EFE7]">
 		<Header />
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={getPath(`/blog/${post.id}/`)}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
+			<!-- Hero Section -->
+			<section class="relative pt-[calc(80px+4rem)] pb-12 text-center border-b border-[#E6D5C3]/15 overflow-hidden">
+				<div class="absolute -top-1/2 left-1/2 -translate-x-1/2 w-[150%] h-full bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(160,113,77,0.15)_0%,transparent_60%)] pointer-events-none"></div>
+				<div class="relative max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					<span class="block font-sans text-xs font-semibold tracking-[0.1em] uppercase text-[#A0714D] mb-4">Góc chia sẻ</span>
+					<h1 class="font-display text-[5rem] md:text-[var(--text-display)] font-bold leading-none tracking-tight mb-6">Blog Cà Phê</h1>
+					<p class="text-xl text-[#D4C1AC] max-w-[600px] mx-auto">
+						Văn hóa cà phê Việt, nghệ thuật pha phin, và những câu chuyện thú vị
+					</p>
+				</div>
+			</section>
+
+			<!-- Blog Posts Section -->
+			<section class="py-16 md:py-24">
+				<div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					{posts.length === 0 ? (
+						<div class="text-center p-16 bg-[#201B17] border border-[#E6D5C3]/15 rounded-xl">
+							<div class="text-5xl mb-4">☕</div>
+							<h2 class="font-display text-2xl font-semibold mb-3">Chưa có bài viết nào</h2>
+							<p class="text-lg text-[#D4C1AC] m-0">
+								Chúng tôi đang chuẩn bị những câu chuyện thú vị về cà phê. Hãy quay lại sau nhé!
+							</p>
+						</div>
+					) : (
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+							{posts.map((post, index) => (
+								<article class:list={[
+									'relative bg-[#201B17] border border-[#E6D5C3]/15 rounded-xl overflow-hidden transition-all duration-200',
+									'hover:border-[#A0714D]',
+									{ 'md:col-span-2': index === 0 }
+								]}>
+									<a href={getPath(`/blog/${post.id}/`)} class="block no-underline text-inherit">
+										<div class:list={[
+											{ 'md:grid md:grid-cols-[1.2fr_1fr] md:gap-8 md:items-center': index === 0 }
+										]}>
+											{post.data.heroImage && (
+												<div class="relative overflow-hidden">
+													<Image
+														width={index === 0 ? 1200 : 600}
+														height={index === 0 ? 600 : 400}
+														src={post.data.heroImage}
+														alt={post.data.title}
+														loading={index < 3 ? 'eager' : 'lazy'}
+														class="w-full h-auto object-cover transition-transform duration-300 hover:scale-103"
+													/>
+													<div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1A1512]/30 pointer-events-none"></div>
+												</div>
+											)}
+											<div class:list={[
+												'p-6',
+												{ 'md:p-8': index === 0 }
+											]}>
+												<div class="font-sans text-sm text-[#A08976] mb-3">
+													<FormattedDate date={post.data.pubDate} />
+												</div>
+												<h2 class:list={[
+													'font-display font-semibold text-[#F5EFE7] mb-3 leading-snug transition-colors duration-150',
+													index === 0 ? 'text-3xl md:leading-tight' : 'text-xl',
+													'hover:text-[#A0714D]'
+												]}>
+													{post.data.title}
+												</h2>
+												{post.data.description && (
+													<p class:list={[
+														'text-[#D4C1AC] leading-relaxed mb-4 overflow-hidden',
+														index === 0 ? 'text-lg line-clamp-3' : 'text-base line-clamp-2'
+													]}>
+														{post.data.description}
+													</p>
+												)}
+												<span class="inline-flex items-center gap-2 font-sans text-sm font-medium text-[#D4C1AC] transition-colors hover:text-[#A0714D]">
+													Đọc tiếp
+													<svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="transition-transform duration-150 group-hover:translate-x-1">
+														<path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+													</svg>
+												</span>
+											</div>
+										</div>
+									</a>
+									<div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(160,113,77,0.08)_0%,transparent_50%)] opacity-0 transition-opacity duration-200 pointer-events-none hover:opacity-100"></div>
+								</article>
+							))}
+						</div>
+					)}
+				</div>
 			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	/* Line clamp utilities */
+	.line-clamp-2 {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+	}
+
+	.line-clamp-3 {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+	}
+
+	/* Hover scale */
+	.hover\:scale-103:hover {
+		transform: scale(1.03);
+	}
+
+	/* Group hover for arrow */
+	article:hover .group-hover\:translate-x-1 {
+		transform: translateX(4px);
+	}
+
+	article:hover .hover\:opacity-100 {
+		opacity: 1;
+	}
+
+	/* Reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		.transition-all,
+		.transition-transform,
+		.transition-colors,
+		.transition-opacity {
+			transition: none;
+		}
+
+		.hover\:scale-103:hover {
+			transform: none;
+		}
+	}
+</style>

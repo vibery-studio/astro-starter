@@ -2,7 +2,6 @@
 title: "Phân Biệt Cà Phê Robusta và Arabica"
 description: "Hướng dẫn chi tiết cách phân biệt hai loại cà phê phổ biến nhất: Robusta và Arabica, từ hương vị đến cách chọn mua"
 pubDate: "Nov 20 2025"
-heroImage: "/images/uploads/robusta-vs-arabica.jpg"
 ---
 
 Robusta và Arabica là hai loại cà phê phổ biến nhất thế giới. Mỗi loại có đặc điểm riêng, phù hợp với khẩu vị và mục đích sử dụng khác nhau.

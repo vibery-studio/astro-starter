@@ -1,0 +1,8 @@
+/**
+ * Utility to create paths that work with both local dev and GitHub Pages base path
+ */
+export function getPath(path: string): string {
+	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+	const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+	return `${base}${normalizedPath}`;
+}

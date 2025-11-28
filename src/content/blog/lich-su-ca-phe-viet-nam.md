@@ -2,7 +2,6 @@
 title: "Lịch Sử Cà Phê Việt Nam - Từ Pháp Đến Ngày Nay"
 description: "Hành trình 150 năm của cà phê Việt Nam, từ thời Pháp thuộc đến khi trở thành cường quốc xuất khẩu cà phê thế giới"
 pubDate: "Nov 10 2025"
-heroImage: "/images/uploads/lich-su-ca-phe.jpg"
 ---
 
 Cà phê Việt Nam không chỉ là thức uống hàng ngày mà còn là một phần của bản sắc văn hóa dân tộc. Hãy cùng tìm hiểu hành trình phát triển đầy tự hào này.

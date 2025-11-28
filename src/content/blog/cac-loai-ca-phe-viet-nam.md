@@ -2,7 +2,6 @@
 title: "Các Loại Cà Phê Truyền Thống Việt Nam"
 description: "Khám phá 7 loại cà phê đặc trưng của Việt Nam từ Bắc vào Nam, từ cà phê đen đá đến bạc xỉu"
 pubDate: "Nov 25 2025"
-heroImage: "/images/uploads/cac-loai-ca-phe.jpg"
 ---
 
 Cà phê Việt Nam đa dạng với nhiều cách pha chế độc đáo, phản ánh văn hóa ẩm thực từng vùng miền. Cùng khám phá các loại cà phê truyền thống được yêu thích nhất.

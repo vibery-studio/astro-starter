@@ -1,0 +1,354 @@
+---
+/**
+ * Contact Page - Dark OLED Luxury (Tailwind)
+ * Contact form and company information
+ */
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Button from '../components/ui/Button.astro';
+import Input from '../components/ui/Input.astro';
+import { SITE_TITLE, COMPANY_NAME, COMPANY_EMAIL, COMPANY_PHONE } from '../consts';
+
+const pageTitle = `Liên Hệ | ${SITE_TITLE}`;
+const pageDescription = 'Liên hệ với Vibe Coding Product Studio để bắt đầu dự án của bạn. Chúng tôi sẵn sàng lắng nghe và hỗ trợ.';
+
+// Formspree form ID from environment variable
+const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID || 'your_formspree_form_id';
+const formspreeAction = `https://formspree.io/f/${formspreeId}`;
+
+// Contact info
+const contactInfo = [
+	{
+		icon: '📧',
+		label: 'Email',
+		value: COMPANY_EMAIL,
+		href: `mailto:${COMPANY_EMAIL}`
+	},
+	{
+		icon: '📞',
+		label: 'Điện thoại',
+		value: COMPANY_PHONE,
+		href: `tel:${COMPANY_PHONE.replace(/\s/g, '')}`
+	},
+	{
+		icon: '📍',
+		label: 'Địa chỉ',
+		value: 'Sài Gòn, Việt Nam',
+		href: null
+	}
+];
+
+// Social links
+const socialLinks = [
+	{ name: 'Facebook', href: 'https://facebook.com', icon: 'facebook' },
+	{ name: 'LinkedIn', href: 'https://linkedin.com', icon: 'linkedin' },
+	{ name: 'GitHub', href: 'https://github.com', icon: 'github' }
+];
+---
+
+<!doctype html>
+<html lang="vi">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<!-- Hero Section -->
+			<section class="relative pt-[calc(80px+4rem)] pb-12 text-center overflow-hidden border-b border-white/10">
+				<div class="absolute -top-1/2 left-1/2 -translate-x-1/2 w-[150%] h-full bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(16,185,129,0.12)_0%,transparent_60%)] pointer-events-none"></div>
+				<div class="relative max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					<h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Liên Hệ Với Chúng Tôi</h1>
+					<p class="text-xl text-white/70 max-w-[600px] mx-auto">
+						Bạn có ý tưởng? Hãy chia sẻ với chúng tôi. Chúng tôi sẵn sàng lắng nghe và đồng hành cùng bạn.
+					</p>
+				</div>
+			</section>
+
+			<!-- Contact Section -->
+			<section class="py-16 md:py-20">
+				<div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					<div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-12 items-start">
+						<!-- Contact Form -->
+						<div class="bg-[#080808] p-6 md:p-8 rounded-2xl border border-white/10">
+							<h2 class="font-display text-2xl font-semibold text-white mb-6">Gửi Tin Nhắn</h2>
+							<form class="flex flex-col gap-5" id="contact-form" method="POST" action={formspreeAction}>
+								<Input
+									name="name"
+									label="Họ và tên"
+									placeholder="Nguyễn Văn A"
+									required
+								/>
+								<Input
+									type="email"
+									name="email"
+									label="Email"
+									placeholder="email@example.com"
+									required
+								/>
+								<Input
+									name="phone"
+									label="Số điện thoại"
+									placeholder="0901 234 567"
+								/>
+								<div class="flex flex-col gap-2">
+									<label for="subject" class="text-sm font-medium text-white/70">Chủ đề</label>
+									<select id="subject" name="subject" class="w-full px-4 py-3 font-sans text-base text-white bg-[#0a0a0a] border border-white/10 rounded-lg transition-all duration-200 focus:outline-none focus:border-emerald-500 focus:shadow-[0_0_0_3px_rgba(16,185,129,0.4)]" required>
+										<option value="">Chọn chủ đề...</option>
+										<option value="project">Dự án mới</option>
+										<option value="consulting">Tư vấn</option>
+										<option value="partnership">Hợp tác</option>
+										<option value="other">Khác</option>
+									</select>
+								</div>
+								<div class="flex flex-col gap-2">
+									<label for="message" class="text-sm font-medium text-white/70">
+										Tin nhắn
+										<span class="text-amber-500 ml-1" aria-hidden="true">*</span>
+									</label>
+									<textarea
+										id="message"
+										name="message"
+										class="w-full px-4 py-3 font-sans text-base text-white bg-[#0a0a0a] border border-white/10 rounded-lg transition-all duration-200 focus:outline-none focus:border-emerald-500 focus:shadow-[0_0_0_3px_rgba(16,185,129,0.4)] resize-y min-h-[120px] placeholder:text-white/40"
+										placeholder="Mô tả ý tưởng hoặc yêu cầu của bạn..."
+										rows="5"
+										required
+									></textarea>
+								</div>
+								<Button type="submit" variant="primary" size="lg" class="mt-4 w-full">
+									Gửi Tin Nhắn
+								</Button>
+							</form>
+
+							<!-- Form States - hidden by default via CSS -->
+							<div class="hidden items-center gap-4 p-6 rounded-lg mt-6 bg-emerald-500/10 border border-emerald-500 text-emerald-500" id="form-success">
+								<span class="text-2xl font-bold">✓</span>
+								<p class="m-0">Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi trong vòng 24 giờ.</p>
+							</div>
+							<div class="hidden items-center gap-4 p-6 rounded-lg mt-6 bg-red-500/10 border border-red-500 text-red-500" id="form-error">
+								<span class="text-2xl font-bold">✕</span>
+								<p class="m-0">Có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ qua email.</p>
+							</div>
+						</div>
+
+						<!-- Contact Info -->
+						<div class="flex flex-col gap-6">
+							<div class="p-6 md:p-8 rounded-2xl bg-[#080808] border border-white/10">
+								<h2 class="font-display text-xl font-semibold text-white mb-6">Thông Tin Liên Hệ</h2>
+								<div class="flex flex-col gap-5">
+									{contactInfo.map((info) => (
+										<div class="flex gap-4 items-start">
+											<span class="text-2xl flex-shrink-0">{info.icon}</span>
+											<div class="flex flex-col gap-1">
+												<span class="text-sm text-white/40">{info.label}</span>
+												{info.href ? (
+													<a href={info.href} class="text-base text-white no-underline transition-colors hover:text-emerald-500">
+														{info.value}
+													</a>
+												) : (
+													<span class="text-base text-white">{info.value}</span>
+												)}
+											</div>
+										</div>
+									))}
+								</div>
+
+								<div class="h-px bg-white/10 my-6"></div>
+
+								<div>
+									<h3 class="text-sm font-medium text-white/40 mb-4">Theo dõi chúng tôi</h3>
+									<div class="flex gap-4">
+										{socialLinks.map((social) => (
+											<a
+												href={social.href}
+												target="_blank"
+												rel="noopener noreferrer"
+												class="flex items-center justify-center w-11 h-11 bg-[#0a0a0a] border border-white/10 rounded-lg text-white/70 transition-all hover:bg-emerald-500 hover:border-emerald-500 hover:text-black"
+												aria-label={social.name}
+											>
+												{social.icon === 'facebook' && (
+													<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+														<path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+													</svg>
+												)}
+												{social.icon === 'linkedin' && (
+													<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+														<path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+													</svg>
+												)}
+												{social.icon === 'github' && (
+													<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+														<path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+													</svg>
+												)}
+											</a>
+										))}
+									</div>
+								</div>
+							</div>
+
+							<!-- Response Time -->
+							<div class="flex gap-4 p-6 rounded-xl items-center bg-[#080808] border border-white/10">
+								<span class="text-3xl">⚡</span>
+								<div class="flex flex-col gap-1">
+									<h3 class="text-base font-semibold text-white m-0">Phản hồi nhanh</h3>
+									<p class="text-sm text-white/70 m-0">
+										Chúng tôi thường phản hồi trong vòng 24 giờ làm việc.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- FAQ Section -->
+			<section class="py-20 bg-[#050505]">
+				<div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+					<h2 class="font-display text-3xl font-bold text-white text-center mb-12">Câu Hỏi Thường Gặp</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div class="p-6 rounded-xl bg-[#080808] border border-white/10">
+							<h3 class="font-display text-lg font-semibold text-white mb-3">Chi phí dự án như thế nào?</h3>
+							<p class="text-base text-white/70 leading-relaxed m-0">
+								Chi phí phụ thuộc vào quy mô và độ phức tạp của dự án. Chúng tôi sẽ
+								đánh giá và báo giá cụ thể sau khi trao đổi về yêu cầu của bạn.
+							</p>
+						</div>
+						<div class="p-6 rounded-xl bg-[#080808] border border-white/10">
+							<h3 class="font-display text-lg font-semibold text-white mb-3">Thời gian hoàn thành MVP?</h3>
+							<p class="text-base text-white/70 leading-relaxed m-0">
+								Với phương pháp Vibe Coding, MVP thường được hoàn thành trong 2-4 tuần,
+								tùy thuộc vào tính năng và độ phức tạp.
+							</p>
+						</div>
+						<div class="p-6 rounded-xl bg-[#080808] border border-white/10">
+							<h3 class="font-display text-lg font-semibold text-white mb-3">Có hỗ trợ sau khi bàn giao không?</h3>
+							<p class="text-base text-white/70 leading-relaxed m-0">
+								Có, chúng tôi cung cấp gói hỗ trợ kỹ thuật và bảo trì sau bàn giao.
+								Chi tiết sẽ được thảo luận trong quá trình trao đổi.
+							</p>
+						</div>
+						<div class="p-6 rounded-xl bg-[#080808] border border-white/10">
+							<h3 class="font-display text-lg font-semibold text-white mb-3">Làm việc remote được không?</h3>
+							<p class="text-base text-white/70 leading-relaxed m-0">
+								Hoàn toàn được! Chúng tôi có kinh nghiệm làm việc remote với khách hàng
+								trong và ngoài nước.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+
+		<script>
+			// Confetti effect
+			function createConfetti() {
+				const colors = ['#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4'];
+				const confettiCount = 150;
+				const container = document.body;
+
+				for (let i = 0; i < confettiCount; i++) {
+					const confetti = document.createElement('div');
+					confetti.className = 'confetti';
+					confetti.style.cssText = `
+						position: fixed;
+						width: ${Math.random() * 10 + 5}px;
+						height: ${Math.random() * 10 + 5}px;
+						background: ${colors[Math.floor(Math.random() * colors.length)]};
+						left: ${Math.random() * 100}vw;
+						top: -20px;
+						opacity: ${Math.random() * 0.7 + 0.3};
+						border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+						pointer-events: none;
+						z-index: 9999;
+						animation: confettiFall ${Math.random() * 3 + 2}s linear forwards;
+						transform: rotate(${Math.random() * 360}deg);
+					`;
+					container.appendChild(confetti);
+
+					// Remove confetti after animation
+					setTimeout(() => confetti.remove(), 5000);
+				}
+			}
+
+			// Formspree AJAX form submission
+			const form = document.getElementById('contact-form') as HTMLFormElement | null;
+			const successMessage = document.getElementById('form-success');
+			const errorMessage = document.getElementById('form-error');
+			const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+			form?.addEventListener('submit', async (e) => {
+				e.preventDefault();
+
+				// Hide any existing messages
+				successMessage?.classList.add('hidden');
+				successMessage?.classList.remove('flex');
+				errorMessage?.classList.add('hidden');
+				errorMessage?.classList.remove('flex');
+
+				// Basic client-side validation
+				const formData = new FormData(form);
+				const email = formData.get('email') as string;
+				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+				if (!emailRegex.test(email)) {
+					errorMessage?.classList.remove('hidden');
+					errorMessage?.classList.add('flex');
+					return;
+				}
+
+				// Show loading state
+				if (submitBtn) {
+					submitBtn.disabled = true;
+					submitBtn.textContent = 'Đang gửi...';
+				}
+
+				try {
+					// Submit to Formspree
+					const response = await fetch(form.action, {
+						method: 'POST',
+						body: formData,
+						headers: {
+							'Accept': 'application/json'
+						}
+					});
+
+					if (response.ok) {
+						// Show success message and confetti
+						form.reset();
+						successMessage?.classList.remove('hidden');
+						successMessage?.classList.add('flex');
+						form.style.display = 'none';
+						createConfetti();
+					} else {
+						throw new Error('Form submission failed');
+					}
+				} catch (error) {
+					errorMessage?.classList.remove('hidden');
+					errorMessage?.classList.add('flex');
+				} finally {
+					// Reset button state
+					if (submitBtn) {
+						submitBtn.disabled = false;
+						submitBtn.textContent = 'Gửi Tin Nhắn';
+					}
+				}
+			});
+		</script>
+
+		<style is:global>
+			@keyframes confettiFall {
+				0% {
+					transform: translateY(0) rotate(0deg);
+					opacity: 1;
+				}
+				100% {
+					transform: translateY(100vh) rotate(720deg);
+					opacity: 0;
+				}
+			}
+		</style>
+	</body>
+</html>

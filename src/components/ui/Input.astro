@@ -1,6 +1,6 @@
 ---
 /**
- * Neumorphic input component
+ * Input - Dark OLED Luxury (Tailwind)
  */
 interface Props {
 	type?: 'text' | 'email' | 'password' | 'tel' | 'url' | 'number';
@@ -27,13 +27,15 @@ const {
 } = Astro.props;
 
 const inputId = `input-${name}`;
+
+const inputClasses = `w-full px-4 py-3 font-sans text-base text-white bg-[#0a0a0a] border rounded-lg transition-all duration-200 placeholder:text-white/40 focus:outline-none focus:border-emerald-500 focus:shadow-[0_0_0_3px_rgba(16,185,129,0.4)] disabled:opacity-60 disabled:cursor-not-allowed ${error ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.4)]' : 'border-white/10'}`;
 ---
 
-<div class:list={['input-group', { 'has-error': !!error }, className]}>
+<div class:list={['flex flex-col gap-2', className]}>
 	{label && (
-		<label for={inputId} class="input-label">
+		<label for={inputId} class="text-sm font-medium text-white/70">
 			{label}
-			{required && <span class="required" aria-hidden="true">*</span>}
+			{required && <span class="text-amber-500 ml-1" aria-hidden="true">*</span>}
 		</label>
 	)}
 	<input
@@ -44,83 +46,13 @@ const inputId = `input-${name}`;
 		required={required}
 		disabled={disabled}
 		value={value}
-		class="input"
+		class={inputClasses}
 		aria-invalid={error ? 'true' : undefined}
 		aria-describedby={error ? `${inputId}-error` : undefined}
 	/>
 	{error && (
-		<p id={`${inputId}-error`} class="input-error" role="alert">
+		<p id={`${inputId}-error`} class="text-sm text-red-500 m-0" role="alert">
 			{error}
 		</p>
 	)}
 </div>
-
-<style>
-	.input-group {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-2);
-	}
-
-	.input-label {
-		font-size: var(--text-sm);
-		font-weight: var(--font-medium);
-		color: var(--color-neutral-700);
-	}
-
-	.required {
-		color: var(--color-error);
-		margin-left: var(--space-1);
-	}
-
-	.input {
-		width: 100%;
-		padding: var(--space-3) var(--space-4);
-		font-family: var(--font-sans);
-		font-size: var(--text-base);
-		color: var(--color-text);
-		background: var(--color-neutral-100);
-		border: none;
-		border-radius: var(--radius-lg);
-		box-shadow: var(--shadow-neuro-inset-light), var(--shadow-neuro-inset-dark);
-		transition: box-shadow var(--transition-base);
-	}
-
-	.input::placeholder {
-		color: var(--color-neutral-400);
-	}
-
-	.input:focus {
-		outline: none;
-		box-shadow:
-			var(--shadow-neuro-inset-light),
-			var(--shadow-neuro-inset-dark),
-			0 0 0 3px rgba(0, 102, 255, 0.2);
-	}
-
-	.input:disabled {
-		opacity: 0.6;
-		cursor: not-allowed;
-	}
-
-	/* Error state */
-	.has-error .input {
-		box-shadow:
-			var(--shadow-neuro-inset-light),
-			var(--shadow-neuro-inset-dark),
-			0 0 0 2px var(--color-error);
-	}
-
-	.input-error {
-		font-size: var(--text-sm);
-		color: var(--color-error);
-		margin: 0;
-	}
-
-	/* Reduced motion */
-	@media (prefers-reduced-motion: reduce) {
-		.input {
-			transition: none;
-		}
-	}
-</style>

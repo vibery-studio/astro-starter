@@ -1,86 +1,356 @@
 ---
+/**
+ * Blog Post Layout - Editorial Style
+ * Clean, sophisticated reading experience
+ */
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+import { getPath } from '../utils/paths';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const pageTitle = `${title} | ${SITE_TITLE}`;
 ---
 
 <html lang="vi">
 	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
+		<BaseHead title={pageTitle} description={description} />
 	</head>
 
 	<body>
 		<Header />
-		<main>
+		<main class="blog-post">
 			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
+				<!-- Article Header -->
+				<header class="article-header">
+					<div class="container">
+						<a href={getPath('/blog')} class="back-link">
+							← Quay lại Blog
+						</a>
+						<div class="article-meta">
 							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+							{updatedDate && (
+								<span class="updated">
+									· Cập nhật: <FormattedDate date={updatedDate} />
+								</span>
+							)}
 						</div>
-						<h1>{title}</h1>
-						<hr />
+						<h1 class="article-title">{title}</h1>
+						{description && (
+							<p class="article-description">{description}</p>
+						)}
 					</div>
-					<slot />
+				</header>
+
+				<!-- Hero Image -->
+				{heroImage && (
+					<div class="hero-image">
+						<div class="container">
+							<Image
+								width={1200}
+								height={600}
+								src={heroImage}
+								alt={title}
+								loading="eager"
+							/>
+						</div>
+					</div>
+				)}
+
+				<!-- Article Content -->
+				<div class="article-container container">
+					<div class="article-content prose">
+						<slot />
+					</div>
+
+					<div class="article-footer">
+						<a href={getPath('/blog')} class="footer-link">
+							← Xem tất cả bài viết
+						</a>
+					</div>
 				</div>
 			</article>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.blog-post {
+		padding-top: 80px;
+	}
+
+	/* Article Header */
+	.article-header {
+		padding: var(--space-12) 0;
+		border-bottom: 1px solid var(--color-border);
+		text-align: center;
+	}
+
+	.article-header .container {
+		max-width: 800px;
+	}
+
+	.back-link {
+		display: inline-block;
+		font-family: var(--font-sans);
+		font-size: var(--text-sm);
+		color: var(--color-text-muted);
+		text-decoration: none;
+		margin-bottom: var(--space-8);
+		transition: color var(--transition-fast);
+	}
+
+	.back-link:hover {
+		color: var(--color-accent);
+	}
+
+	.article-meta {
+		font-family: var(--font-sans);
+		font-size: var(--text-sm);
+		color: var(--color-text-muted);
+		margin-bottom: var(--space-4);
+	}
+
+	.updated {
+		font-style: italic;
+	}
+
+	.article-title {
+		font-family: var(--font-serif);
+		font-size: var(--text-5xl);
+		font-weight: var(--font-medium);
+		color: var(--color-text);
+		line-height: var(--leading-tight);
+		margin: 0 0 var(--space-6) 0;
+	}
+
+	.article-description {
+		font-size: var(--text-xl);
+		color: var(--color-text-secondary);
+		line-height: var(--leading-relaxed);
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	/* Hero Image */
+	.hero-image {
+		padding: var(--space-8) 0;
+	}
+
+	.hero-image .container {
+		max-width: 1000px;
+	}
+
+	.hero-image img {
+		width: 100%;
+		height: auto;
+		border-radius: var(--radius-md);
+	}
+
+	/* Article Container */
+	.article-container {
+		max-width: 680px;
+		margin: 0 auto;
+		padding: var(--space-12) var(--section-padding-x) var(--space-16);
+	}
+
+	/* Article Content - Prose Styling */
+	.article-content {
+		font-size: var(--text-lg);
+		line-height: var(--leading-relaxed);
+		color: var(--color-text-secondary);
+	}
+
+	.article-content :global(h2) {
+		font-family: var(--font-serif);
+		font-size: var(--text-3xl);
+		font-weight: var(--font-medium);
+		color: var(--color-text);
+		margin: var(--space-12) 0 var(--space-4) 0;
+	}
+
+	.article-content :global(h3) {
+		font-family: var(--font-serif);
+		font-size: var(--text-2xl);
+		font-weight: var(--font-medium);
+		color: var(--color-text);
+		margin: var(--space-10) 0 var(--space-3) 0;
+	}
+
+	.article-content :global(h4) {
+		font-family: var(--font-sans);
+		font-size: var(--text-lg);
+		font-weight: var(--font-semibold);
+		color: var(--color-text);
+		margin: var(--space-8) 0 var(--space-2) 0;
+	}
+
+	.article-content :global(p) {
+		margin: 0 0 var(--space-5) 0;
+	}
+
+	.article-content :global(a) {
+		color: var(--color-accent);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		transition: color var(--transition-fast);
+	}
+
+	.article-content :global(a:hover) {
+		color: var(--color-text);
+	}
+
+	.article-content :global(strong) {
+		color: var(--color-text);
+		font-weight: var(--font-semibold);
+	}
+
+	.article-content :global(em) {
+		font-style: italic;
+	}
+
+	.article-content :global(ul),
+	.article-content :global(ol) {
+		margin: 0 0 var(--space-5) 0;
+		padding-left: var(--space-6);
+	}
+
+	.article-content :global(li) {
+		margin-bottom: var(--space-2);
+	}
+
+	.article-content :global(blockquote) {
+		margin: var(--space-8) 0;
+		padding: var(--space-6) var(--space-8);
+		background: var(--color-bg-accent);
+		border-left: 3px solid var(--color-accent);
+		font-family: var(--font-serif);
+		font-size: var(--text-xl);
+		font-style: italic;
+		color: var(--color-text);
+	}
+
+	.article-content :global(blockquote p) {
+		margin: 0;
+	}
+
+	.article-content :global(code) {
+		font-family: var(--font-mono);
+		font-size: 0.9em;
+		background: var(--color-bg-subtle);
+		padding: 0.2em 0.4em;
+		border-radius: var(--radius-sm);
+		color: var(--color-text);
+	}
+
+	.article-content :global(pre) {
+		margin: var(--space-8) 0;
+		padding: var(--space-5);
+		background: var(--color-neutral-900);
+		border-radius: var(--radius-md);
+		overflow-x: auto;
+	}
+
+	.article-content :global(pre code) {
+		background: none;
+		padding: 0;
+		color: var(--color-neutral-300);
+		font-size: var(--text-sm);
+	}
+
+	.article-content :global(table) {
+		width: 100%;
+		margin: var(--space-8) 0;
+		border-collapse: collapse;
+		font-size: var(--text-base);
+	}
+
+	.article-content :global(th),
+	.article-content :global(td) {
+		padding: var(--space-3) var(--space-4);
+		text-align: left;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.article-content :global(th) {
+		font-weight: var(--font-semibold);
+		color: var(--color-text);
+	}
+
+	.article-content :global(img) {
+		max-width: 100%;
+		height: auto;
+		border-radius: var(--radius-md);
+		margin: var(--space-8) 0;
+	}
+
+	.article-content :global(hr) {
+		border: none;
+		border-top: 1px solid var(--color-border);
+		margin: var(--space-10) 0;
+	}
+
+	/* Article Footer */
+	.article-footer {
+		margin-top: var(--space-12);
+		padding-top: var(--space-8);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.footer-link {
+		font-family: var(--font-sans);
+		font-size: var(--text-sm);
+		font-weight: var(--font-medium);
+		color: var(--color-text-secondary);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+
+	.footer-link:hover {
+		color: var(--color-accent);
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.article-title {
+			font-size: var(--text-3xl);
+		}
+
+		.article-description {
+			font-size: var(--text-lg);
+		}
+
+		.article-content {
+			font-size: var(--text-base);
+		}
+
+		.article-content :global(h2) {
+			font-size: var(--text-2xl);
+		}
+
+		.article-content :global(h3) {
+			font-size: var(--text-xl);
+		}
+
+		.article-content :global(blockquote) {
+			font-size: var(--text-lg);
+			padding: var(--space-4) var(--space-6);
+		}
+	}
+
+	/* Reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		.back-link,
+		.footer-link,
+		.article-content :global(a) {
+			transition: none;
+		}
+	}
+</style>

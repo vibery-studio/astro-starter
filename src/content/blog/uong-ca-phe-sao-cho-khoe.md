@@ -2,7 +2,6 @@
 title: "Uống Cà Phê Sao Cho Khỏe - Lời Khuyên Từ Chuyên Gia"
 description: "Hướng dẫn uống cà phê đúng cách để tận dụng lợi ích sức khỏe và tránh tác dụng phụ. Bao nhiêu ly một ngày là đủ?"
 pubDate: "Nov 28 2025"
-heroImage: "/images/uploads/uong-ca-phe-khoe.jpg"
 ---
 
 Cà phê mang lại nhiều lợi ích cho sức khỏe nếu uống đúng cách. Tuy nhiên, lạm dụng có thể gây hại. Cùng tìm hiểu cách uống cà phê khoa học và an toàn.
